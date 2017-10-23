@@ -1,29 +1,34 @@
 package com.learn.housePrice.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.learn.housePrice.enums.UserSexEnum;
-
+import com.learn.housePrice.enums.UserLoginStatus;
+/*
+ * Created by lilin on 17-10-23
+ * 用户Entity
+ */
 public class UserEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private String userName;
-	private String passWord;
-	private UserSexEnum userSex;
 	private String nickName;
+	private String email;
+	private String pswd;
+	private Date createTime;
+	private Date lastLoginTime;
+	private UserLoginStatus status;
 
 	public UserEntity() {
 		super();
 	}
 
-	public UserEntity(String userName, String passWord, UserSexEnum userSex) {
+	public UserEntity(String nickName, String pswd, String email) {
 		super();
-		this.passWord = passWord;
-		this.userName = userName;
-		this.userSex = userSex;
+		this.nickName = nickName;
+		this.pswd = pswd;
+		this.email = email;
 	}
 
 	public Long getId() {
@@ -32,30 +37,6 @@ public class UserEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassWord() {
-		return passWord;
-	}
-
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
-	}
-
-	public UserSexEnum getUserSex() {
-		return userSex;
-	}
-
-	public void setUserSex(UserSexEnum userSex) {
-		this.userSex = userSex;
 	}
 
 	public String getNickName() {
@@ -70,6 +51,46 @@ public class UserEntity implements Serializable {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPswd() {
+		return pswd;
+	}
+
+	public void setPswd(String pswd) {
+		this.pswd = pswd;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public UserLoginStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserLoginStatus status) {
+		this.status = status;
 	}
 
 }
