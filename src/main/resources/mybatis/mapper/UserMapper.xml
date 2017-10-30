@@ -3,51 +3,51 @@
 <mapper namespace="com.learn.housePrice.mapper.UserMapper" >
     <resultMap id="BaseResultMap" type="com.learn.housePrice.entity.UserEntity" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="userName" property="userName" jdbcType="VARCHAR" />
-        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
-        <result column="user_sex" property="userSex" javaType="com.learn.housePrice.enums.UserSexEnum"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+        <result column="pswd" property="pswd" jdbcType="VARCHAR" />     
+        <result column="email" property="email" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, userName, passWord, user_sex, nick_name
+        id, nickName, email, pswd
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
        SELECT 
        <include refid="Base_Column_List" />
-       FROM users
+       FROM u_user
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
-       FROM users
+       FROM u_user
        WHERE id = #{id}
     </select>
 
     <insert id="insert" parameterType="com.learn.housePrice.entity.UserEntity" >
        INSERT INTO 
-            users
-            (userName,passWord,user_sex) 
+            u_user
+            (nickName,pswd,email) 
         VALUES
-            (#{userName}, #{passWord}, #{userSex})
+            (#{nickName}, #{pswd}, #{email})
     </insert>
 
     <update id="update" parameterType="com.learn.housePrice.entity.UserEntity" >
        UPDATE 
-            users 
+            u_user
        SET 
-        <if test="userName != null">userName = #{userName},</if>
-        <if test="passWord != null">passWord = #{passWord},</if>
-        nick_name = #{nickName}
+        <if test="nickName != null">nickName = #{nickName},</if>
+        <if test="pswd != null">pswd = #{pswd},</if>
+        <if test="email != null">email = #{email},</if>
+        nickName = #{nickName}
        WHERE 
             id = #{id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Long" >
        DELETE FROM
-             users 
+             u_user 
        WHERE 
              id =#{id}
     </delete>

@@ -22,9 +22,9 @@ public class UserMappingTest {
 
 	@Test
 	public void testInsert() throws Exception {
-		UserMapper.insert(new UserEntity("aa", "a123456", UserSexEnum.MAN));
-		UserMapper.insert(new UserEntity("bb", "b123456", UserSexEnum.WOMAN));
-		UserMapper.insert(new UserEntity("cc", "b123456", UserSexEnum.WOMAN));
+		UserMapper.insert(new UserEntity("aa", "a123456", ""));
+		UserMapper.insert(new UserEntity("bb", "b123456", ""));
+		UserMapper.insert(new UserEntity("cc", "b123456", ""));
 
 		Assert.assertEquals(3, UserMapper.getAll().size());
 	}
@@ -42,10 +42,10 @@ public class UserMappingTest {
 	
 	@Test
 	public void testUpdate() throws Exception {
-		UserEntity user = UserMapper.getOne(28L);
+		UserEntity user = UserMapper.getOne(2L);
 		System.out.println(user.toString());
 		user.setNickName("neo");
 		UserMapper.update(user);
-		Assert.assertTrue(("neo".equals(UserMapper.getOne(28L).getNickName())));
+		Assert.assertTrue(("neo".equals(UserMapper.getOne(2L).getNickName())));
 	}
 }
