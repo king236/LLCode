@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learn.housePrice.entity.UserEntity;
+import com.learn.housePrice.entity.User;
 import com.learn.housePrice.mapper.UserMapper;
 
 @RestController
@@ -17,23 +17,23 @@ public class UserController {
 	private UserMapper userMapper;
 	
 	@RequestMapping(value="/getUsers")
-	public List<UserEntity> getUser(){
+	public List<User> getUser(){
 		return userMapper.getAll();				
 	}
 	
 	@RequestMapping("/getUser")
-	public UserEntity getUser(Long id) {
-    	UserEntity user=userMapper.getOne(id);
+	public User getUser(Long id) {
+    	User user=userMapper.getOne(id);
         return user;
     }
     
     @RequestMapping("/add")
-    public void save(UserEntity user) {
+    public void save(User user) {
     	userMapper.insert(user);
     }
     
     @RequestMapping(value="update")
-    public void update(UserEntity user) {
+    public void update(User user) {
     	userMapper.update(user);
     }    
 	

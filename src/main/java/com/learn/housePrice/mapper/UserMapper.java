@@ -2,18 +2,17 @@ package com.learn.housePrice.mapper;
 
 import java.util.List;
 
-import com.learn.housePrice.entity.UserEntity;
+import com.learn.housePrice.entity.User;
 
 public interface UserMapper {
 
-	List<UserEntity> getAll();
+	List<User> getAll();
 	
-	UserEntity getOne(Long id);
+	User getOne(Long id);
 
-	void insert(UserEntity user);
+	void insert(User user);
 
-	void update(UserEntity user);
+	void update(User user);
 
-	void delete(Long id);
-	
+	void delete(Long id);	
 }

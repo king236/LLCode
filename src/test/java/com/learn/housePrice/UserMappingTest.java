@@ -1,5 +1,6 @@
 package com.learn.housePrice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -9,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.learn.housePrice.entity.UserEntity;
-import com.learn.housePrice.enums.UserSexEnum;
+import com.learn.housePrice.entity.User;
 import com.learn.housePrice.mapper.UserMapper;
 
 @RunWith(SpringRunner.class)
@@ -22,16 +22,22 @@ public class UserMappingTest {
 
 	@Test
 	public void testInsert() throws Exception {
-		UserMapper.insert(new UserEntity("aa", "a123456", ""));
-		UserMapper.insert(new UserEntity("bb", "b123456", ""));
-		UserMapper.insert(new UserEntity("cc", "b123456", ""));
-
-		Assert.assertEquals(3, UserMapper.getAll().size());
+		
+		for(int i=0; i<8; i++){
+			User user =  new User();
+			user.setNickname("test" + i);
+			user.setPswd("testPSWD" + i);
+			user.setEmail("testEMAIL" + i);
+			user.setStatus(0L);
+			user.setCreateTime(new Date());
+			UserMapper.insert(user);
+		}
+		Assert.assertEquals(8, UserMapper.getAll().size());
 	}
 
 	@Test
 	public void testQuery() throws Exception {
-		List<UserEntity> users = UserMapper.getAll();
+		List<User> users = UserMapper.getAll();
 		if(users==null || users.size()==0){
 			System.out.println("is null");
 		}else{
@@ -42,10 +48,10 @@ public class UserMappingTest {
 	
 	@Test
 	public void testUpdate() throws Exception {
-		UserEntity user = UserMapper.getOne(2L);
+		User user = UserMapper.getOne(2L);
 		System.out.println(user.toString());
-		user.setNickName("neo");
+		user.setNickname("neo");
 		UserMapper.update(user);
-		Assert.assertTrue(("neo".equals(UserMapper.getOne(2L).getNickName())));
+		Assert.assertTrue(("neo".equals(UserMapper.getOne(2L).getNickname())));
 	}
 }

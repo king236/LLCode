@@ -1,4 +1,4 @@
-package com.learn.housePrice.domain;
+package com.learn.housePrice.entity;
 
 import java.io.Serializable;
 
