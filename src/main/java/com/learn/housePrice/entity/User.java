@@ -19,7 +19,7 @@ import java.io.Serializable;
  * @since 2017-11-04
  */
 @TableName("u_user")
-public class User extends Model<User> {
+public class User{
 
     private static final long serialVersionUID = 1L;
 
@@ -107,11 +107,6 @@ public class User extends Model<User> {
 
 	public void setStatus(Long status) {
 		this.status = status;
-	}
-
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
 	}
 
 	@Override

@@ -36,7 +36,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class MysqlGenerator {
 
 	private static String prefix="u_"; //table前缀
-	private static String table="u_user";//table名字
+	private static String[] table={"u_user_role","u_permission","u_role","u_role_permission"};//table名字
 	
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
@@ -63,7 +63,7 @@ public class MysqlGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[]{prefix});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] {table}); // 需要生成的表
+        strategy.setInclude(table); // 需要生成的表
         
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 字段名生成策略
