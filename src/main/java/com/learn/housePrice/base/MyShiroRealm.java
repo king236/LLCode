@@ -23,33 +23,25 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.PermissionService;
+import com.learn.housePrice.service.RoleService;
+import com.learn.housePrice.service.UserService;
 
 public class MyShiroRealm extends AuthorizingRealm{
 	
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken authcToken) throws AuthenticationException {
-		return null;
-	}
-
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/*@Autowired
-	private SysUserService sysUserService;
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
-	private SysPermissionService sysPermissionService;
+	private PermissionService permissionService;
 	
 	@Autowired
 	StringRedisTemplate stringRedisTemplate;
 	
 	@Autowired
-	private SysRoleService sysRoleService;
+	private RoleService roleService;
 	
 	//用户登录次数计数  redisKey 前缀
 	private String SHIRO_LOGIN_COUNT = "shiro_login_count_";
@@ -58,16 +50,13 @@ public class MyShiroRealm extends AuthorizingRealm{
 	private String SHIRO_IS_LOCK = "shiro_is_lock_";
 
 
-
-	*//**
+	/*
 	 * 认证信息.(身份验证) : Authentication 是用来验证用户身份
 	 * 
 	 * @param token
 	 * @return
 	 * @throws AuthenticationException
-	 *//*
-	 *
-	
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
@@ -93,32 +82,32 @@ public class MyShiroRealm extends AuthorizingRealm{
 		map.put("pswd", pawDES);
 		SysUser user = null;
 		// 从数据库获取对应用户名密码的用户
-		List<SysUser> userList = sysUserService.selectByMap(map);
+		List<User> userList = userService.selectByMap(map);
 		if(userList.size()!=0){
 			user = userList.get(0);
 		} 
 		if (null == user) {
 			throw new AccountException("帐号或密码不正确！");
 		}else if("0".equals(user.getStatus())){
-			*//**
+			/**
 			 * 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
-			 *//*
+			 */
 			throw new DisabledAccountException("此帐号已经设置为禁止登录！");
 		}else{
 			//登录成功
 			//更新登录时间 last login time
 			user.setLastLoginTime(new Date());
-			sysUserService.updateById(user);
+			userService.updateById(user);
 			//清空登录计数
 			opsForValue.set(SHIRO_LOGIN_COUNT+name, "0");
 		}
 		Logger.getLogger(getClass()).info("身份认证成功，登录用户："+name);
 		return new SimpleAuthenticationInfo(user, password, getName());
 	}
-
-	*//**
-	 * 授权
-	 *//*
+	
+	 /*
+	  * 授权
+	  */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
@@ -129,18 +118,18 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//根据用户ID查询角色（role），放入到Authorization里。
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", userId);
-		List<SysRole> roleList = sysRoleService.selectByMap(map);
+		List<Role> roleList = RoleService.selectByMap(map);
 		Set<String> roleSet = new HashSet<String>();
-		for(SysRole role : roleList){
+		for(Role role : roleList){
 			roleSet.add(role.getType());
 		}
 		Set<String> roleSet = new HashSet<String>();
 		roleSet.add("100002");
 		info.setRoles(roleSet);
 		//根据用户ID查询权限（permission），放入到Authorization里。
-		List<SysPermission> permissionList = sysPermissionService.selectByMap(map);
+		List<Permission> permissionList = PermissionService.selectByMap(map);
 		Set<String> permissionSet = new HashSet<String>();
-		for(SysPermission Permission : permissionList){
+		for(Permission Permission : permissionList){
 			permissionSet.add(Permission.getName());
 		}
 		Set<String> permissionSet = new HashSet<String>();
