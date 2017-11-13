@@ -21,13 +21,18 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import com.learn.housePrice.entity.Permission;
+import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.service.PermissionService;
 import com.learn.housePrice.service.RoleService;
 import com.learn.housePrice.service.UserService;
+import com.learn.housePrice.util.DESUtil;
 
 public class MyShiroRealm extends AuthorizingRealm{
 	
@@ -78,9 +83,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 		map.put("nickname", name);
 		//密码进行加密处理  明文为  password+name
 		String paw = password+name;
-		String pawDES = MyDES.encryptBasedDes(paw);
+		String pawDES = DESUtil.encryptBasedDes(paw);
 		map.put("pswd", pawDES);
-		SysUser user = null;
+		User user = null;
 		// 从数据库获取对应用户名密码的用户
 		List<User> userList = userService.selectByMap(map);
 		if(userList.size()!=0){
@@ -97,7 +102,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 			//登录成功
 			//更新登录时间 last login time
 			user.setLastLoginTime(new Date());
-			userService.updateById(user);
+			userService.update(user);
 			//清空登录计数
 			opsForValue.set(SHIRO_LOGIN_COUNT+name, "0");
 		}
@@ -137,6 +142,6 @@ public class MyShiroRealm extends AuthorizingRealm{
 		permissionSet.add("权限删除");
 		info.setStringPermissions(permissionSet);
         return info;
-	}*/
+	}
 	
 }

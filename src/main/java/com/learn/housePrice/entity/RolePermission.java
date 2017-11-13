@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author lilin
- * @since 2017-11-10
+ * @since 2017-11-13
  */
 @TableName("u_role_permission")
 public class RolePermission {
@@ -22,29 +22,29 @@ public class RolePermission {
     /**
      * 角色ID
      */
-	private Long rid;
+	private String rid;
     /**
      * 权限ID
      */
-	private Long pid;
+	private String pid;
 
 
-	public Long getRid() {
+	public String getRid() {
 		return rid;
 	}
 
-	public void setRid(Long rid) {
+	public void setRid(String rid) {
 		this.rid = rid;
 	}
 
-	public Long getPid() {
+	public String getPid() {
 		return pid;
 	}
 
-	public void setPid(Long pid) {
+	public void setPid(String pid) {
 		this.pid = pid;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "RolePermission{" +

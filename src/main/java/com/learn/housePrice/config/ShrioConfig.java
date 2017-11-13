@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
 
-import com.learn.housePrice.base.MyShiroRealm;
+import com.learn.housePrice.realm.MyShiroRealm;
 
 @Configuration
 public class ShrioConfig {

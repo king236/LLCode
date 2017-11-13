@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author lilin
- * @since 2017-11-10
+ * @since 2017-11-13
  */
 @TableName("u_user_role")
 public class UserRole {
@@ -22,26 +22,26 @@ public class UserRole {
     /**
      * 用户ID
      */
-	private Long uid;
+	private String uid;
     /**
      * 角色ID
      */
-	private Long rid;
+	private String rid;
 
 
-	public Long getUid() {
+	public String getUid() {
 		return uid;
 	}
 
-	public void setUid(Long uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 
-	public Long getRid() {
+	public String getRid() {
 		return rid;
 	}
 
-	public void setRid(Long rid) {
+	public void setRid(String rid) {
 		this.rid = rid;
 	}
 

@@ -24,7 +24,7 @@ public class User{
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+	private String id;
     /**
      * 用户昵称
      */
@@ -50,14 +50,14 @@ public class User{
     /**
      * 1:有效，0:禁止登录
      */
-	private Long status;
+	private String status;
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -101,11 +101,11 @@ public class User{
 		this.lastLoginTime = lastLoginTime;
 	}
 
-	public Long getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Long status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

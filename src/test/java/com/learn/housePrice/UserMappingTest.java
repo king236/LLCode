@@ -28,7 +28,7 @@ public class UserMappingTest {
 			user.setNickname("test" + i);
 			user.setPswd("testPSWD" + i);
 			user.setEmail("testEMAIL" + i);
-			user.setStatus(0L);
+			user.setStatus("0");
 			user.setCreateTime(new Date());
 			UserMapper.insert(user);
 		}

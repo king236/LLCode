@@ -2,8 +2,6 @@ package com.learn.housePrice.entity;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -14,15 +12,14 @@ import java.io.Serializable;
  * </p>
  *
  * @author lilin
- * @since 2017-11-10
+ * @since 2017-11-13
  */
 @TableName("u_role")
 public class Role {
 
     private static final long serialVersionUID = 1L;
 
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+	private String id;
     /**
      * 角色名称
      */
@@ -33,11 +30,11 @@ public class Role {
 	private String type;
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
