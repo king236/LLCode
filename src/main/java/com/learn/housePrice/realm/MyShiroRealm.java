@@ -1,4 +1,4 @@
-package com.learn.housePrice.base;
+package com.learn.housePrice.realm;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -87,7 +87,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		map.put("pswd", pawDES);
 		User user = null;
 		// 从数据库获取对应用户名密码的用户
-		List<User> userList = userService.selectByMap(map);
+		List<User> userList = null;//userService.selectByMap(map);
 		if(userList.size()!=0){
 			user = userList.get(0);
 		} 
@@ -123,7 +123,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//根据用户ID查询角色（role），放入到Authorization里。
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", userId);
-		List<Role> roleList = RoleService.selectByMap(map);
+		/*List<Role> roleList = RoleService.selectByMap(map);
 		Set<String> roleSet = new HashSet<String>();
 		for(Role role : roleList){
 			roleSet.add(role.getType());
@@ -140,7 +140,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		Set<String> permissionSet = new HashSet<String>();
 		permissionSet.add("权限添加");
 		permissionSet.add("权限删除");
-		info.setStringPermissions(permissionSet);
+		info.setStringPermissions(permissionSet);*/
         return info;
 	}
 	

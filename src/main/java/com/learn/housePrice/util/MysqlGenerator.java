@@ -18,6 +18,9 @@ package com.learn.housePrice.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -26,15 +29,20 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.learn.housePrice.config.PropertiesConfig;
 
 /**
  *   @Description : MybatisPlus代码生成器
  *   ---------------------------------
- *   @Author : Liang.Guangqing
+ *   @Author : lilin
  *   @Date : Create in 2017/9/19 14:48　
  */
+@ComponentScan
 public class MysqlGenerator {
 
+	@Autowired
+	private static PropertiesConfig properties;
+	
 	private static String prefix="u_"; //table前缀
 	private static String[] table={"u_user_role","u_permission","u_role","u_role_permission"};//table名字
 	
@@ -42,7 +50,7 @@ public class MysqlGenerator {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("E://mybatis");
+        gc.setOutputDir(properties.getOutputDir());
         gc.setFileOverride(true);
         gc.setActiveRecord(true);
         gc.setEnableCache(false);// XML 二级缓存
@@ -54,10 +62,10 @@ public class MysqlGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("cql900928");
-        dsc.setUrl("jdbc:mysql://192.168.20.102:3306/housePrice?characterEncoding=utf8");
+        dsc.setDriverName(properties.getDataDriverName());
+        dsc.setUsername(properties.getDataUserName());
+        dsc.setPassword(properties.getDataPassword());
+        dsc.setUrl(properties.getDataUrl());
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
