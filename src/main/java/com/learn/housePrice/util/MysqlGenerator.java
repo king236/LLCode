@@ -18,8 +18,10 @@ package com.learn.housePrice.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -37,16 +39,23 @@ import com.learn.housePrice.config.PropertiesConfig;
  *   @Author : lilin
  *   @Date : Create in 2017/9/19 14:48　
  */
-@ComponentScan
+
+@Component
 public class MysqlGenerator {
+	
+	@Autowired
+	private static PropertiesConfig properties;	
 
 	@Autowired
-	private static PropertiesConfig properties;
+	public MysqlGenerator(PropertiesConfig properties){
+		MysqlGenerator.properties = properties;
+	}
 	
 	private static String prefix="u_"; //table前缀
 	private static String[] table={"u_user_role","u_permission","u_role","u_role_permission"};//table名字
 	
     public static void main(String[] args) {
+    	
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();

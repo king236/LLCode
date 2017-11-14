@@ -1,10 +1,12 @@
 package com.learn.housePrice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.mapper.UserMapper;
 
+@Service
 public class UserService {
 
 	@Autowired
