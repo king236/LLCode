@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: cql900928
-    url: jdbc:mysql://127.0.0.1:3306/houseprice?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.1.102:3306/housePrice?useUnicode=true&characterEncoding=utf-8 #127.0.0.1:3306/houseprice
     type: com.alibaba.druid.pool.DruidDataSource   #这里是配置druid连接池，以下都是druid的配置信息
     filters: stat,wall,log4j
     maxActive: 20
