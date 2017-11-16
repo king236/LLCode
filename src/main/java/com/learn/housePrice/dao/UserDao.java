@@ -1,10 +1,11 @@
-package com.learn.housePrice.mapper;
+package com.learn.housePrice.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learn.housePrice.entity.User;
 
-public interface UserMapper {
+public interface UserDao {
 
 	List<User> getAll();
 	
@@ -15,4 +16,6 @@ public interface UserMapper {
 	void update(User user);
 
 	void delete(Long id);	
+	
+	List<User> selectByMap(Map<String, Object> params);
 }

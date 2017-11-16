@@ -1,4 +1,4 @@
-package com.learn.housePrice.mapper;
+package com.learn.housePrice.dao;
 
 public class UserRoleMapper {
 

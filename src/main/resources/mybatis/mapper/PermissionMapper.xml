@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.housePrice.dao.PermissionDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.learn.housePrice.entity.Permission">
+		<id column="id" property="id" />
+		<result column="url" property="url" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
+		SELECT 
+			t1.id, t1.url, t1.name
+		FROM
+			u_permission t1
+		LEFT JOIN
+			(SELECT 
+				t2.pid as pid
+			FROM
+				u_role_permission t2, u_role t3
+			WHERE
+				t2.rid = t3.rid 
+			ADN 
+				t3.uid = #{id} ) t4
+		ON
+			t1.id = t4.pid
+	</select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.housePrice.dao.RoleDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.learn.housePrice.entity.Role">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+	</resultMap>
+
+	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
+		SELECT 
+			t1.id, t1.name, t1.type
+		FROM
+			u_role t1
+		LEFT JOIN
+			u_user_role t2
+		ON
+			t1.id = t2.rid
+		WHERE
+			t2.uid = #{id}
+	</select>
+
+</mapper>

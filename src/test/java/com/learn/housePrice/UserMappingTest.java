@@ -1,7 +1,9 @@
 package com.learn.housePrice;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,16 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.learn.housePrice.dao.PermissionDao;
+import com.learn.housePrice.dao.RoleDao;
+import com.learn.housePrice.dao.UserDao;
+import com.learn.housePrice.entity.Permission;
+import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
-import com.learn.housePrice.mapper.UserMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMappingTest {
 
 	@Autowired
-	private UserMapper UserMapper;
-
+	private UserDao userDao;
+	@Autowired
+	private RoleDao roleDao;
+	@Autowired
+	private PermissionDao permissionDao;
+	
 	@Test
 	public void testInsert() throws Exception {
 		
@@ -30,14 +40,14 @@ public class UserMappingTest {
 			user.setEmail("testEMAIL" + i);
 			user.setStatus("0");
 			user.setCreateTime(new Date());
-			UserMapper.insert(user);
+			userDao.insert(user);
 		}
-		Assert.assertEquals(8, UserMapper.getAll().size());
+		
 	}
 
-	@Test
+/*	@Test
 	public void testQuery() throws Exception {
-		List<User> users = UserMapper.getAll();
+		List<User> users = userDao.getAll();
 		if(users==null || users.size()==0){
 			System.out.println("is null");
 		}else{
@@ -48,10 +58,26 @@ public class UserMappingTest {
 	
 	@Test
 	public void testUpdate() throws Exception {
-		User user = UserMapper.getOne(2L);
+		User user = userDao.getOne(2L);
 		System.out.println(user.toString());
 		user.setNickname("neo");
-		UserMapper.update(user);
-		Assert.assertTrue(("neo".equals(UserMapper.getOne(2L).getNickname())));
+		userDao.update(user);
+		Assert.assertTrue(("neo".equals(userDao.getOne(2L).getNickname())));
+	}*/
+	
+	@Test
+	public void selectByMap() throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("nickname", "aa");
+		params.put("pswd", "a123456");
+		List<User> userList = userDao.selectByMap(params);
+		System.out.println("userList = " + userList.toString());
+		if(userList != null && userList.size() > 0){
+			params.put("id", userList.get(0).getId());
+			List<Role> roleList = roleDao.selectByMap(params);
+			System.out.println("roleList = " + roleList.toString());
+			List<Permission> permissionList = permissionDao.selectByMap(params);
+			System.out.println("permissionList = " + permissionList.toString());
+		}
 	}
 }

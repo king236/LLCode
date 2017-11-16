@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.User;
-import com.learn.housePrice.mapper.UserMapper;
 
 @RestController
 public class UserController {
 	
 	@Autowired
-	private UserMapper userMapper;
+	private UserDao userMapper;
 	
 	@RequestMapping(value="/getUsers")
 	public List<User> getUser(){

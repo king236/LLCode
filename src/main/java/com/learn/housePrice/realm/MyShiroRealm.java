@@ -21,32 +21,33 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 
+import com.learn.housePrice.dao.PermissionDao;
+import com.learn.housePrice.dao.RoleDao;
+import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
-import com.learn.housePrice.service.PermissionService;
-import com.learn.housePrice.service.RoleService;
-import com.learn.housePrice.service.UserService;
 import com.learn.housePrice.util.DESUtil;
 
+@Component
 public class MyShiroRealm extends AuthorizingRealm{
 	
 	@Autowired
-	private UserService userService;
+	private UserDao userDao;
 	
 	@Autowired
-	private PermissionService permissionService;
+	private PermissionDao permissionDao;
 	
 	@Autowired
 	StringRedisTemplate stringRedisTemplate;
 	
 	@Autowired
-	private RoleService roleService;
+	private RoleDao roleDao;
 	
 	//用户登录次数计数  redisKey 前缀
 	private String SHIRO_LOGIN_COUNT = "shiro_login_count_";
@@ -87,7 +88,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		map.put("pswd", pawDES);
 		User user = null;
 		// 从数据库获取对应用户名密码的用户
-		List<User> userList = null;//userService.selectByMap(map);
+		List<User> userList = userDao.selectByMap(map);
 		if(userList.size()!=0){
 			user = userList.get(0);
 		} 
@@ -102,7 +103,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 			//登录成功
 			//更新登录时间 last login time
 			user.setLastLoginTime(new Date());
-			userService.update(user);
+			userDao.update(user);
 			//清空登录计数
 			opsForValue.set(SHIRO_LOGIN_COUNT+name, "0");
 		}
@@ -123,24 +124,23 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//根据用户ID查询角色（role），放入到Authorization里。
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", userId);
-		/*List<Role> roleList = RoleService.selectByMap(map);
+		List<Role> roleList = roleDao.selectByMap(map);
 		Set<String> roleSet = new HashSet<String>();
 		for(Role role : roleList){
 			roleSet.add(role.getType());
 		}
-		Set<String> roleSet = new HashSet<String>();
-		roleSet.add("100002");
+		roleSet.add("100002");//测试数据
 		info.setRoles(roleSet);
 		//根据用户ID查询权限（permission），放入到Authorization里。
-		List<Permission> permissionList = PermissionService.selectByMap(map);
+		List<Permission> permissionList = permissionDao.selectByMap(map);
 		Set<String> permissionSet = new HashSet<String>();
 		for(Permission Permission : permissionList){
 			permissionSet.add(Permission.getName());
 		}
-		Set<String> permissionSet = new HashSet<String>();
-		permissionSet.add("权限添加");
-		permissionSet.add("权限删除");
-		info.setStringPermissions(permissionSet);*/
+		
+		permissionSet.add("权限添加");//测试数据
+		permissionSet.add("权限删除");//测试数据
+		info.setStringPermissions(permissionSet);
         return info;
 	}
 	
