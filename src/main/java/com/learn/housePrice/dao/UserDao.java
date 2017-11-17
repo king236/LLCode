@@ -11,7 +11,7 @@ public interface UserDao {
 	
 	User getOne(Long id);
 
-	void insert(User user);
+	Long insert(User user);
 
 	void update(User user);
 

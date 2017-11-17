@@ -22,26 +22,26 @@ public class UserRole {
     /**
      * 用户ID
      */
-	private String uid;
+	private Long uid;
     /**
      * 角色ID
      */
-	private String rid;
+	private Long rid;
 
 
-	public String getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(String uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 
-	public String getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(String rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 

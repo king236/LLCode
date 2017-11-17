@@ -22,26 +22,26 @@ public class RolePermission {
     /**
      * 角色ID
      */
-	private String rid;
+	private Long rid;
     /**
      * 权限ID
      */
-	private String pid;
+	private Long pid;
 
 
-	public String getRid() {
+	public Long getRid() {
 		return rid;
 	}
 
-	public void setRid(String rid) {
+	public void setRid(Long rid) {
 		this.rid = rid;
 	}
 
-	public String getPid() {
+	public Long getPid() {
 		return pid;
 	}
 
-	public void setPid(String pid) {
+	public void setPid(Long pid) {
 		this.pid = pid;
 	}
 	

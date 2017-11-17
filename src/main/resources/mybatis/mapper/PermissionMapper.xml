@@ -20,9 +20,9 @@
 			FROM
 				u_role_permission t2, u_role t3
 			WHERE
-				t2.rid = t3.rid 
-			ADN 
-				t3.uid = #{id} ) t4
+				t2.rid = t3.id 
+			AND 
+				t3.id = #{id} ) t4
 		ON
 			t1.id = t4.pid
 	</select>

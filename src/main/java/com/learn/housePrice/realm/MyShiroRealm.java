@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -107,7 +106,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 			//清空登录计数
 			opsForValue.set(SHIRO_LOGIN_COUNT+name, "0");
 		}
-		Logger.getLogger(getClass()).info("身份认证成功，登录用户："+name);
+		//Logger.getLogger(getClass()).info("身份认证成功，登录用户："+name);
 		return new SimpleAuthenticationInfo(user, password, getName());
 	}
 	
@@ -119,7 +118,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 			PrincipalCollection principals) {
 		System.out.println("权限认证方法：MyShiroRealm.doGetAuthorizationInfo()");
 		User user = (User)SecurityUtils.getSubject().getPrincipal();
-		String userId = user.getId();
+		Long userId = user.getId();
 		SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
 		//根据用户ID查询角色（role），放入到Authorization里。
 		Map<String, Object> map = new HashMap<String, Object>();

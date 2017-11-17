@@ -19,7 +19,7 @@ public class Permission {
 
     private static final long serialVersionUID = 1L;
 
-	private String id;
+	private Long id;
     /**
      * url地址
      */
@@ -30,11 +30,11 @@ public class Permission {
 	private String name;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
