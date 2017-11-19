@@ -15,7 +15,7 @@ public class PropertiesConfig {
     private String dataPassword;
 	@Value("${spring.datasource.url}")
     private String dataUrl;
-	@Value("${mybatis.outputDir}")
+	@Value("${mybatisplus.outputDir}")
 	private String outputDir;
 
 	
