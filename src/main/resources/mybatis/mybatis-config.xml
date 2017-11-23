@@ -22,7 +22,7 @@
         <!-- 数据库超过25000秒仍未响应则超时 -->  
         <setting name="defaultStatementTimeout" value="25000" />  
         <!-- 打印查询语句 -->  
-        <setting name="logImpl" value="LOG4J2" />  
+        <setting name="logImpl" value="LOG4J" />  
     </settings>  
         <typeAliases>
         <typeAlias alias="Integer" type="java.lang.Integer" />

@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">
-            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+            %d{HH:mm:ss} %5p %-20.20l{1.} : %m%n
         </Property>
     </Properties>
     <Appenders>
@@ -11,7 +11,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.learn.housePrice.dao" level="debug" additivity="false">
+        <Logger name="com.learn.housePrice.dao" level="trace" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
         </Logger>
 
