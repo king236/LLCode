@@ -1,4 +1,4 @@
-package com.learn.housePrice.config;
+/*package com.learn.housePrice.config;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import com.learn.housePrice.realm.MyShiroRealm;
 @Configuration
 public class ShrioConfig {
 
-	/**
+	*//**
 	 * ShiroFilterFactoryBean 处理拦截资源文件问题。
 	 * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
 	 * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
@@ -22,7 +22,7 @@ public class ShrioConfig {
 	 * Filter Chain定义说明 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过
 	 * 3、部分过滤器可指定参数，如perms，roles
 	 *
-	 */
+	 *//*
 	@Bean
 	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -56,11 +56,11 @@ public class ShrioConfig {
 		securityManager.setRealm(myShiroRealm());
 		return securityManager;
 	}
-	/**
+	*//**
 	 * 身份认证realm; (这个需要自己写，账号密码校验；权限等)
 	 * 
 	 * @return
-	 */
+	 *//*
 	@Bean
 	public MyShiroRealm myShiroRealm() {
 		MyShiroRealm myShiroRealm = new MyShiroRealm();
@@ -68,3 +68,4 @@ public class ShrioConfig {
 	}
 }
 	
+*/

@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.learn.housePrice.dao")
+@MapperScan("com.learn.housePrice")
 public class HousePriceApplication {
 
 	public static void main(String[] args) {
