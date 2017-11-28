@@ -8,7 +8,7 @@
 反之没有实现开发人员也好提供一个fallback。
 所以，我们要明白的是Modernizr只是帮我们检测feature是否被支持，它并不能够给浏览器添加那些本来不支持的feature。 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script> --%>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 <!-- Style CSS -->
