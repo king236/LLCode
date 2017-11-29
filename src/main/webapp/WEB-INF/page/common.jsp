@@ -7,9 +7,10 @@
 <!-- Modernizr帮助我们检测浏览器是否实现了某个feature，如果实现了那么开发人员就可以充分利用这个feature做一些工作，
 反之没有实现开发人员也好提供一个fallback。
 所以，我们要明白的是Modernizr只是帮我们检测feature是否被支持，它并不能够给浏览器添加那些本来不支持的feature。 -->
-<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.2.1.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script> --%>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Style CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/AdminLTE.min.css" />

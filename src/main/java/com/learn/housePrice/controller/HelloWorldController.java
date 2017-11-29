@@ -45,5 +45,9 @@ public class HelloWorldController {
         return modelAndView;
     }
 
-    
+    @RequestMapping(value = "/loginA", method = RequestMethod.GET)
+    public ModelAndView login(){
+    	ModelAndView modelAndView = new ModelAndView("/login");
+        return modelAndView;
+    }
 }
