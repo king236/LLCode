@@ -13,4 +13,10 @@
 
 <!-- Style CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
+<!-- Theme style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/AdminLTE.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/AdminLTE.min.css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/skins/_all-skins.min.css" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
