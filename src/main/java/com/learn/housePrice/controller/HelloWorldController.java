@@ -1,23 +1,23 @@
 package com.learn.housePrice.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.learn.housePrice.entity.User;
 import com.learn.housePrice.entiy.LearnResouce;
 
 @Controller
+@RequestMapping(value = "/admin")
 public class HelloWorldController {
 
-
-    
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(){
         List<LearnResouce> learnList =new ArrayList<LearnResouce>();
         LearnResouce bean =new LearnResouce("官方参考文档","Spring Boot Reference Guide","http://docs.spring.io/spring-boot/docs/1.5.1.RELEASE/reference/htmlsingle/#getting-started-first-application");
@@ -45,9 +45,16 @@ public class HelloWorldController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/loginA", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView login(){
     	ModelAndView modelAndView = new ModelAndView("/login");
         return modelAndView;
+    }
+    
+    @RequestMapping(value="/login", method = RequestMethod.GET)    
+    public Map doLogin(User user){
+    	Map<String, Object> map = new HashMap<>();
+    	
+    	return map;
     }
 }

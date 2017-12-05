@@ -17,7 +17,7 @@
   <div class="login-box-body">
    
 	  <div class="form-group has-feedback">
-         <p id="loginResult" class="text-primary">Sign in to start your session</p>
+         <p id="loginResult" class="text-primary">请输入用户名和密码登录。</p>
       </div>
       <div class="form-group has-feedback">
         <input name="username" type="text" class="form-control" placeholder="用户名">
@@ -38,9 +38,6 @@
         <!-- /.col -->
       </div>
 
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
-
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -52,7 +49,7 @@
 <script src="${pageContext.request.contextPath}/js/validate.css" ></script>
 <script>
 	var loginUrl = '${requestContext.contextPath}/admin/login';
-	var redirectUrl = '${requestContext.contextPath}${RequestParameters["redirect_url"]!"/admin"}';
+	var redirectUrl = '';
 </script>
 </body>
 </html>
