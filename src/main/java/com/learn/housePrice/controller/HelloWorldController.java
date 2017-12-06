@@ -70,10 +70,10 @@ public class HelloWorldController {
     	Result result = new Result();
     	User userCheck = userDao.getUser(user);
     	if (userCheck != null) {
-			session.setAttribute("logeduser", userCheck);
+			session.setAttribute("userInfo", userCheck);
 			result.setResult("success");
 		} else {
-			session.removeAttribute("logeduser");
+			session.removeAttribute("userInfo");
 			result.setResult("error");
 			result.setMessage("登录失败，用户名或者密码错误。");
 		}

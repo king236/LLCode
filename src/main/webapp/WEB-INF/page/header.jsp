@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/WEB-INF/page/common.jsp"%>
 <title></title>
-</head>
+</head> 
 <body class="hold-transition skin-blue-light sidebar-mini">
 	<%--顶部导航条--%>
     <header class="main-header">
@@ -26,7 +26,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <img class="user-image" src="${pageContext.request.contextPath}/adminLTE/img/user2-160x160.jpg"
                                  alt="User Image">
-                            <span class="hidden-xs">HELLO</span>
+                            <span class="hidden-xs">${sessionScope['userInfo'].nickname}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header" style="color: white">
