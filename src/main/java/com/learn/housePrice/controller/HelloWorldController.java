@@ -5,18 +5,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.entiy.LearnResouce;
+import com.learn.housePrice.util.Result;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class HelloWorldController {
 
+	@Autowired
+	UserDao userDao;
+	
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index(){
         List<LearnResouce> learnList =new ArrayList<LearnResouce>();
@@ -51,10 +63,20 @@ public class HelloWorldController {
         return modelAndView;
     }
     
-    @RequestMapping(value="/login", method = RequestMethod.GET)    
-    public Map doLogin(User user){
-    	Map<String, Object> map = new HashMap<>();
-    	
-    	return map;
+    @RequestMapping(value="/login", method = RequestMethod.POST)   
+    @ResponseBody
+    public Result doLogin(Model model, User user, HttpSession session){
+    	//model.addAttribute("userInfo", userDao.getUser(user));
+    	Result result = new Result();
+    	User userCheck = userDao.getUser(user);
+    	if (userCheck != null) {
+			session.setAttribute("logeduser", userCheck);
+			result.setResult("success");
+		} else {
+			session.removeAttribute("logeduser");
+			result.setResult("error");
+			result.setMessage("登录失败，用户名或者密码错误。");
+		}
+    	return result;
     }
 }

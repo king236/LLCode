@@ -24,7 +24,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
+        <input name="password" type="password" class="form-control" placeholder="密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -33,7 +33,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" >登录</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" onClick="checkLogin()">登录</button>
         </div>
         <!-- /.col -->
       </div>
@@ -45,11 +45,11 @@
 
 
 <!-- jQuery 3 -->
-<script src="${pageContext.request.contextPath}/js/login.css" ></script>
-<script src="${pageContext.request.contextPath}/js/validate.css" ></script>
+<script src="${pageContext.request.contextPath}/js/login.js" ></script>
+<script src="${pageContext.request.contextPath}/js/validate.js" ></script>
 <script>
 	var loginUrl = '${requestContext.contextPath}/admin/login';
-	var redirectUrl = '';
+	var redirectUrl = '${requestContext.contextPath}/admin/index';
 </script>
 </body>
 </html>

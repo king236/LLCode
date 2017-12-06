@@ -18,4 +18,6 @@ public interface UserDao {
 	void delete(Long id);	
 	
 	List<User> selectByMap(Map<String, Object> params);
+	
+	User getUser(User user);
 }

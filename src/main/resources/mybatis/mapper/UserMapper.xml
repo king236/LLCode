@@ -29,6 +29,14 @@
        	AND pswd = #{pswd}
 	</select>
 
+	<select id="getUser" parameterType="com.learn.housePrice.entity.User" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+       	FROM u_user
+       	WHERE nickname = #{nickname}
+       	AND pswd = #{pswd}
+	</select>
+
     <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />

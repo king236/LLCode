@@ -32,8 +32,8 @@ function doLogin() {
 		type : 'post',
 		url : loginUrl,
 		data : {
-			'username' : $("input[name=username]").val(),
-			'password' : $("input[name=password]").val()
+			'nickname' : $("input[name=username]").val(),
+			'pswd' : $("input[name=password]").val()
 		},// 传给后台的数据
 		dataType : 'json',// 服务器返回的数据类型 可选XML ,Json jsonp script html text等
 		success : function(data) {
@@ -43,7 +43,7 @@ function doLogin() {
 				window.location.href = redirectUrl;
 			} else {
 				$("#loginResult").addClass("text-danger");
-				$("#loginResult").text(data.errmsg);
+				$("#loginResult").text(data.message);
 			}
 		},
 		error : function() {
