@@ -8,7 +8,7 @@
 <%@include file="/WEB-INF/page/common.jsp"%>
 <title></title>
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	<%@include file="/WEB-INF/page/header.jsp"%>
 	<%@include file="/WEB-INF/page/left-menue.jsp"%>

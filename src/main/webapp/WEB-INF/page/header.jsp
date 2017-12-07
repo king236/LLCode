@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@include file="/WEB-INF/page/common.jsp"%>
-<title></title>
-</head> 
-<body class="hold-transition skin-blue-light sidebar-mini">
 	<%--顶部导航条--%>
     <header class="main-header">
         <a class="logo" href="#">
-            <span class="logo-mini"><b>半</b>暖</span>
-            <span class="logo-lg"><b>S</b>emi<b>W</b>arm</span>
+            <span class="logo-mini"><b>系统</b></span>
+            <span class="logo-lg"><b>后台管理系统</b></span>
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation">
-            <a class="sidebar-toggle" data-toggle="offcanvas" href="#" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
@@ -33,7 +25,7 @@
                                 <img class="img-circle" src="${pageContext.request.contextPath}/adminLTE/img/user2-160x160.jpg"
                                      alt="User Image">
                                 <p style="color: white">
-                                   HELLO<%--  <%=administratorName%> --%>
+                                   ${sessionScope['userInfo'].nickname}
                                 </p>
                                 <small>权限等级</small>
                                 123<%-- <%=privilegeLevel%> --%>
@@ -92,5 +84,3 @@
             </div>
         </nav>
     </header>
-</body>
-</html>
