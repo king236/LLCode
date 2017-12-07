@@ -10,6 +10,8 @@
 <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-3.2.1.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script> --%>
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${pageContext.request.contextPath}/adminLTE/js/adminlte.min.js"></script>
 
 <!-- Style CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" />
@@ -21,6 +23,9 @@
 <!-- AdminLTE little style like left menue '>' -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/font-awesome/css/font-awesome.css"" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/font-awesome/css/font-awesome.min.css"" />
+<!-- Ionicons -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/Ionicons/css/ionicons.min.css">
+
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
