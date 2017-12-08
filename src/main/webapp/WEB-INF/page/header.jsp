@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<%--顶部导航条--%>
     <header class="main-header">
         <a class="logo" href="#">
@@ -8,7 +7,7 @@
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation">
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -25,7 +24,7 @@
                                 <img class="img-circle" src="${pageContext.request.contextPath}/adminLTE/img/user2-160x160.jpg"
                                      alt="User Image">
                                 <p style="color: white">
-                                   ${sessionScope['userInfo'].nickname}
+                                   ${sessionScope['userInfo'].nickname} 
                                 </p>
                                 <small>权限等级</small>
                                 123<%-- <%=privilegeLevel%> --%>

@@ -5,18 +5,18 @@
 	<section class="sidebar">
 		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu" data-widget="tree">
-			<li class="header">HEADER</li>
-			<!-- Optionally, you can add icons to the links -->
-			<li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-			<li><a href="#"><i class="fa fa-link"></i> <span>Another
-						Link</span></a></li>
-			<li class="treeview"><a href="#"><i class="fa fa-link"></i>
-					<span>Multilevel</span> <span class="pull-right-container">
+			<li id="main-index">
+				<a href="${requestContext.contextPath}/admin/index">
+					<i class='fa fa-home'></i> <span>首页</span>
+				</a>
+			</li>
+			<li class="treeview"><a href="#"><i class="fa fa-cog"></i>
+					<span>系统设置</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li><a href="#">Link in level 2</a></li>
-					<li><a href="#">Link in level 2</a></li>
+					<li><a href="#"><i class="fa fa-circle-o"></i>菜单</a></li>
+					<li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
 				</ul>
 			</li>
 		</ul>
