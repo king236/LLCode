@@ -15,7 +15,7 @@
 						<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li><a href="#"><i class="fa fa-circle-o"></i>菜单</a></li>
+					<li><a href="${requestContext.contextPath}/menu/"><i class="fa fa-circle-o"></i>菜单</a></li>
 					<li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
 				</ul>
 			</li>

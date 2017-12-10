@@ -25,6 +25,7 @@
 			
 		</section>
 	</div>
+	<%@include file="/WEB-INF/page/footer.jsp"%>
 </div>
 </body>
 </html>
