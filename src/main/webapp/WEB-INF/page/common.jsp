@@ -26,6 +26,14 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/adminLTE/css/Ionicons/css/ionicons.min.css">
 
+<!-- easy-ui -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js?t=2017.5.17"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/locale/easyui-lang-zh_CN.js?t=20161011.01"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.json.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/layer/layer.js?r=2017.06.20"></script>
 
+<link href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css?t=20161011.01" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/easyui/themes/icon.css?t=20161201.01" rel="stylesheet" type="text/css" />
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

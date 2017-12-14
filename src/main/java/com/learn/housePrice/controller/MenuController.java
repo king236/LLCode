@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuController {
 	
 	@RequestMapping(value="/")
-	public void index(){
+	public String index(){
 		
+		return "/menu/menu_main";
 	}
 	
 }
