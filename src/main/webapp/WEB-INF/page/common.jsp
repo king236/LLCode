@@ -33,7 +33,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/layer/layer.js?r=2017.06.20"></script>
 
-<link href="${pageContext.request.contextPath}/easyui/themes/default/easyui.css?t=20161011.01" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/easyui/themes/bootstrap/easyui.css?t=20161011.01" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/easyui/themes/icon.css?t=20161201.01" rel="stylesheet" type="text/css" />
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
