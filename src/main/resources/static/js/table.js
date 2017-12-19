@@ -430,6 +430,8 @@
             }
             that.options.data = that.data;
             that.initBody(true);
+            //*************//
+            reloadSwitch();
         });
 
         this.$selectItem = this.$body.find(sprintf('[name="%s"]', this.options.selectItemName));
@@ -511,4 +513,10 @@
         collapseIcon: "glyphicon glyphicon-chevron-right",//折叠样式
         expandIcon: "glyphicon glyphicon-chevron-down"//展开样式
     });
+    
+    
+    //重新加载switch的样式
+    var reloadSwitch = function(){
+    	 $('#mySwitch input').bootstrapSwitch();  
+    }
 })(jQuery);

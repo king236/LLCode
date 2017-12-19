@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <%@include file="/WEB-INF/page/common.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-switch/css/bootstrapSwitch.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-switch/css/bootstrap-switch.css" />
 </head>
 <body>
 <body class="hold-transition skin-blue-light sidebar-mini">
@@ -418,8 +418,13 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/table.js" ></script>
-<script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrapSwitch.js" ></script>
+<script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrap-switch.js" ></script>
 <script type="text/javascript">
+
+$(function(){  
+    $('#mySwitch input').bootstrapSwitch();  
+})  
+
 $('#tb_departments').bootstrapTable({
     data : [{Id: 1, Name: "系统设置", Url: null, ParentId: null,  CreateTime: null, Status: 1, SortOrder: 1},
             {Id: 2, Name: "菜单管理", Url: "/Systems/Menu/Index", ParentId: 1,  CreateTime: null, Status: 1},
@@ -460,20 +465,10 @@ $('#tb_departments').bootstrapTable({
             	field: 'switch',
                 title: '状态',
                 formatter: function(v,r,i){
-                	var str = /* '<div class="switch" data-on="success" data-off="warning">' + 
-                		' <input type="checkbox" checked />' +
-                	 	'</div>' */
-                	/*  	'<div class="switch has-switch" data-on="success" data-off="warning"> ' + 
-                			'<div class="switch-on switch-animate" style="">'+
-                				'<input type="checkbox" checked="">'+
-                				'<span class="switch-left switch-success">ON</span><label>&nbsp;</label>'+
-                				'<span class="switch-right switch-warning">OFF</span>'+
-                			'</div>'+
-                		'</div>' */
-            			'<div class="switch" data-on="success" data-off="warning" data-on-label="启用" data-off-label="禁用">'+
-            			'<input type="checkbox" checked />'+
-            			'</div>'
-                	 	return str;
+                	var str = '<div class="switch"  id="mySwitch" >  ' + 
+        							'<input type="checkbox" checked  data-on-color="success" data-off-color="warning" data-on-text="启用" data-off-text="禁用"/>  '+
+        					  '</div>  ';
+                	return str;
                 }
             }, {
             	field:"shortcutOperation",
