@@ -51,7 +51,7 @@
  -->
 				<div id="toolbar" class="btn-group">
 					<button id="btn_add" type="button" class="btn btn-primary"
-						onclick="addUser()">
+						onclick="addMenu()">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 					</button>
 					<button id="btn_edit" type="button" class="btn btn-success">
@@ -228,7 +228,8 @@ $('#tb_departments').bootstrapTable({
             	}
            } ]
 });
-function addUser() {
+
+function addMenu() {
 	resetForm();
 	$("#menumodal").modal('show');
 	$("#menumodal-title").text("新增用户");
@@ -238,7 +239,7 @@ function addUser() {
 }
 
 function resetForm() {
-/* 	$("input[name=id]").val("");
+ 	$("input[name=id]").val("");
 	$("input[name=username]").val("");
 	$("input[name=username]").attr("disabled", null);
 	$("input[name=password]").val("");
@@ -251,23 +252,7 @@ function resetForm() {
 	$("input[name=qqNumber]").val("");
 	$("input[name=wechat]").val("");
 	$("input[name=comment]").val("");
-	$("#searchWXFilter").val(""); */
-	
-	/* if ("flowerList" in userData) {
-		var selectStr = '<option value="" >暂不绑定微信号</option>';
-		flowerList = userData.flowerList;
-		if (flowerList!=null && flowerList.length>0) {
-			for (var i=0; i<flowerList.length; i++) {
-				var myphone = "暂无手机号";
-				if (!isNull(flowerList[i].phone)) {
-					myphone = flowerList[i].phone;
-				}
-				selectStr += "<option value='"+flowerList[i].openId+"' title='国家："+flowerList[i].country+"&#10;省份："+flowerList[i].province+"&#10;城市："+flowerList[i].city+"&#10;手机号："+myphone+"'>";
-				selectStr += flowerList[i].nickName+"</option>";
-			}
-		}
-		$("#wechat").html(selectStr);
-	} */
+	$("#searchWXFilter").val(""); 
 }
 </script>
 </body>
