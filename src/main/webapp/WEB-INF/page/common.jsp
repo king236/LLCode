@@ -42,5 +42,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+<!-- toastr -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/toastr/toastr.min.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/toastr/toastr.min.js"></script>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<script type="text/javascript">
+ toastr.options.positionClass = 'toast-center-center';
+ </script>

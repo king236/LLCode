@@ -158,102 +158,11 @@
 	<%@include file="/WEB-INF/page/footer.jsp"%>
 </div>
 
-<script src="${pageContext.request.contextPath}/js/table.js" ></script>
+<script src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table-extends-tree.js" ></script>
 <script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrap-switch.js" ></script>
+<script src="${pageContext.request.contextPath}/js/menu.js" ></script>
+<script src="${pageContext.request.contextPath}/js/validate.js" ></script>
 <script type="text/javascript">
-
-$(function(){  
-    $('#mySwitch input').bootstrapSwitch();  
-})  
-
-$('#tb_departments').bootstrapTable({
-    data : [{Id: 1, Name: "系统设置", Url: null, ParentId: null,  CreateTime: null, Status: 1, SortOrder: 1},
-            {Id: 2, Name: "菜单管理", Url: "/Systems/Menu/Index", ParentId: 1,  CreateTime: null, Status: 1},
-            {Id: 3, Name: "订单管理", Url: null, ParentId: null,  CreateTime: "2017-05-31 17:05:27"},
-            {Id: 4, Name: "基础数据", Url: null, ParentId: null,  CreateTime: "2017-05-31 17:05:55"},
-            {Id: 5, Name: "新增订单", Url: "/order/add", ParentId: 3,  CreateTime: "2017-05-31 17:07:03"}],
-    toolbar: '#toolbar',
-    sidePagination: 'client',
-    pagination: false,
-    treeView: true,
-    treeId: "Id",
-    treeField: "Name",
-   // treeRootLevel: 1,
-    striped: true,
-    clickToSelect: true,
-    singleSelect: true,
-    //collapseIcon: "glyphicon glyphicon-triangle-right",//折叠样式
-    //expandIcon: "glyphicon glyphicon-triangle-bottom"//展开样式
-    columns: [{
-    			checkbox: true
-    		}, {
-            	field: 'Id',
-                title: '#',
-                width: '5%'
-            }, {
-                field: 'Name',
-                title: '部门名称',
-                width: '25%'
-            }, {
-                field: 'Url',
-                title: '上级部门',
-                width: '35%'
-            }, {
-                field: 'Level',
-                title: '部门级别',
-              //  width: '80px'
-            }, {
-            	field: 'switch',
-                title: '状态',
-                formatter: function(v,r,i){
-                	var str = '<div class="switch"  id="mySwitch" >  ' + 
-        							'<input type="checkbox" checked  data-on-color="success" data-off-color="warning" data-on-text="启用" data-off-text="禁用"/>  '+
-        					  '</div>  ';
-                	return str;
-                }
-            }, {
-            	field:"shortcutOperation",
-            	title:"快捷操作",
-            	align: "center",
-            	formatter: function(v,r,i){
-            	var str = "<div class='btn-group'>"+
-            	    "<button id="+r.modelId+" class='btn btn-success btn-xs' onclick='applyReason(\""+r.modelId+"\")'>申请权限</button>"+
-            	    "</div>"
-            	if(r.status=='00'){
-            	  var str = "<div class='btn-group'>"+
-            	     "<button class='btn btn-success btn-xs' style='background:#ccc;border-color:#ccc;' >已申请</button>"+
-            	     "</div>"
-            	 }
-            	return str;
-            	}
-           } ]
-});
-
-function addMenu() {
-	resetForm();
-	$("#menumodal").modal('show');
-	$("#menumodal-title").text("新增用户");
-	/* $("input[name=password]").attr("placeholder", "输入密码");
-	$("input[name=password2]").attr("placeholder", "再次输入密码确认");
-	$("#usersave").attr('onclick', 'addUserCheck()'); */
-}
-
-function resetForm() {
- 	$("input[name=id]").val("");
-	$("input[name=username]").val("");
-	$("input[name=username]").attr("disabled", null);
-	$("input[name=password]").val("");
-	$("input[name=password2]").val("");
-	$("select[name=groupName]").val("未分组");
-	$("#statusRadio1").prop("checked", true);
-	$("input[name=cellPhone]").val("");
-	$("input[name=telephone]").val("");
-	$("input[name=email]").val("");
-	$("input[name=qqNumber]").val("");
-	$("input[name=wechat]").val("");
-	$("input[name=comment]").val("");
-	$("#searchWXFilter").val(""); 
-}
 </script>
 </body>
 </html>
