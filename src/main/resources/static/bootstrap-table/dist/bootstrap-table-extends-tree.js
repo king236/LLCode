@@ -138,7 +138,7 @@
     var checkExist = function(data, item){
     	var check = false;
     	$.each(data, function (i, v) {
-            if (this.Id == item.Id) {
+            if (this.id == item.id) {
             	check = true;
             	return false;
             }      

@@ -77,6 +77,7 @@
 							<div class="modal-body">
 								<form id='menuform' role="form">
 									<input type="hidden" id="menuId" name="id" />
+									<input type="hidden" id="parentMenuId" name="parentMenuId" />
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
@@ -106,7 +107,7 @@
 														<i class="fa fa-align-left"></i>
 													</div>
 													<input type="text" class="required form-control"
-														name="parentMenuUrl" placeholder="父节点URL" tabIndex="3">
+														name="parentMenuName" placeholder="父节点URL" tabIndex="3">
 												</div>
 											</div>
 											<div class="form-group">
