@@ -1,5 +1,6 @@
 package com.learn.housePrice.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,9 +59,20 @@ public class MenuController {
 	@RequestMapping(value="getMenu", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Menu> getMenu(){
-		Map<String,Object> params = new HashMap<>();
-		List<Menu> menuList = menuDao.getMenu(params);
-		System.out.println(menuList);
-	 	return menuList;
+		
+		List<Menu> menuParentList = menuDao.getMenuParent();
+		List<Menu> menuAllList = new ArrayList<Menu>();
+		if(menuParentList != null && menuParentList.size() > 0){
+			for(Menu menu : menuParentList){
+				menuAllList.add(menu);
+				Map<String,Object> params = new HashMap<>();
+				params.put("parentMenuId", menu.getId());
+				List<Menu> menuChildList = menuDao.getMenuChild(params);
+				if(menuChildList != null && menuChildList.size() > 0){
+					menuAllList.addAll(menuChildList);					
+				}
+			}
+		}
+	 	return menuAllList;
 	}
 }

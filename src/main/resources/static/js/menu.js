@@ -80,8 +80,8 @@ function addMenu() {
 	resetForm();
 	var row = $('#tb_departments').bootstrapTable('getSelections');
 	if(row.length > 0){
-		$("input[name=parentMenuName]").val(row[0].Name);	
-		$("input[name=parentMenuId]").val(row[0].Id);
+		$("input[name=parentMenuName]").val(row[0].menuName);	
+		$("input[name=parentMenuId]").val(row[0].id);
 	}
 	$("#menumodal").modal('show');
 	$("#menumodal-title").text("新增用户");
@@ -138,7 +138,11 @@ function addMenuCheck() {
 	}
 }
 
-function doAddMenu() {
+function refreshTable(){
+	$('#tb_departments').bootstrapTable('refresh', {});
+}
+
+function doAddMenu() {	
 	$.ajax({
 		type : 'post',
 		url : '/menu/add',
@@ -146,8 +150,8 @@ function doAddMenu() {
 		dataType : 'json',// 服务器返回的数据类型 可选XML ,Json jsonp script html text等
 		success : function(data) {
 			if (data.result == 'success') {
-				$("#menuform").modal('hide');
-				refreshTable(currentPage);
+				$("#menumodal").modal('hide');
+				refreshTable();
 			} else {
 				toastr.warning(data.message);
 			}

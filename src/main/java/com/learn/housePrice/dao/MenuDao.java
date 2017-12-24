@@ -11,5 +11,7 @@ public interface MenuDao {
 	
 	Long getSortMax(Menu menu);
 	
-	List<Menu> getMenu(Map<String,Object> params);
+	List<Menu> getMenuChild(Map<String,Object> params);
+	
+	List<Menu> getMenuParent();
 }

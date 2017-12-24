@@ -74,7 +74,7 @@
     var getParent = function (node, source, field) {
         var data = [];
         var items = $.grep(source, function (item, index) {
-            return node.ParentId == item[field];
+            return node.parentMenuId == item[field];
         });
         $.each(items, function (index, item) {
             data.splice(0, 0, item);
@@ -89,7 +89,7 @@
     var getChild = function (node, source, field) {
         var data = [];
         var items = $.grep(source, function (item, index) {
-            return item.ParentId == node[field];
+            return item.parentMenuId == node[field];
         });
 
         $.each(items, function (index, item) {
@@ -313,9 +313,9 @@
                     var indent, icon;
                     var index = 1;
                     if (that.options.treeView && column.field == that.options.treeField) {
-                        var indent = item.ParentId == null ? '' : sprintf('<span style="margin-left: %spx;"></span>', (index++) * 15);
+                        var indent = item.parentMenuId == null ? '' : sprintf('<span style="margin-left: %spx;"></span>', (index++) * 15);
                         var child = $.grep(data, function (d, i) {
-                            return d.ParentId == item[that.options.treeId] && !d.hidden;
+                            return d.parentMenuId == item[that.options.treeId] && !d.hidden;
                         });
                         icon = sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5px;"></span>', child.length > 0 ? that.options.expandIcon : that.options.collapseIcon);
                         //icon = sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5px;"></span>', child.length > 0 ? that.options.expandIcon : "");

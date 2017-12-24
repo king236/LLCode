@@ -65,7 +65,21 @@
     		<if test="parentMenuId == null">parent_menu_id is null</if>    		
     </select>
     
-    <select id="getMenu" resultMap="BaseResultMap" parameterType="java.util.Map" >
-    	SELECT * FROM u_menu
+    <select id="getMenuChild" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    	SELECT * 
+    	FROM 
+    		u_menu
+    	WHERE
+    		parent_menu_id = #{parentMenuId}
+    	ORDER BY sort
+    </select>
+    
+    <select id="getMenuParent" resultMap="BaseResultMap" >
+    	SELECT * 
+    	FROM 
+    		u_menu
+    	WHERE
+    		parent_menu_id is null 
+    	ORDER BY sort    	
     </select>
 </mapper>
