@@ -51,3 +51,4 @@
 <script type="text/javascript">
  toastr.options.positionClass = 'toast-center-center';
  </script>
+

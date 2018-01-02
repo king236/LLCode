@@ -30,6 +30,30 @@ public class MenuController {
 		return "/menu/menu_main";
 	}
 	
+	@RequestMapping(value="/leftMenuData", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, Object>> leftMenuData(){
+		List<Map<String, Object>> menuAll = new ArrayList<>();
+		List<Menu> menuParentList = menuDao.getMenuParent();
+		
+		if(menuParentList != null && menuParentList.size() > 0){
+			for(Menu menu : menuParentList){
+				Map<String, Object> map = new HashMap<>();
+				map.put("menuName", menu.getMenuName());
+				
+				Map<String,Object> params = new HashMap<>();
+				params.put("parentMenuId", menu.getId());
+				List<Menu> menuChildList = menuDao.getMenuChild(params);
+				if(menuChildList != null && menuChildList.size() > 0){
+					map.put("children", menuChildList);				
+				}
+				
+				menuAll.add(map);
+			}
+		}
+	 	return menuAll;
+	}
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	@ResponseBody
 	public Result addMenu(Menu menu){

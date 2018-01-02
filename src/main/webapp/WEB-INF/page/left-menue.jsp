@@ -5,20 +5,27 @@
 	<section class="sidebar">
 		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu" data-widget="tree">
-			<li id="main-index">
+			<li id="menu_default">
 				<a href="${requestContext.contextPath}/admin/index">
 					<i class='fa fa-home'></i> <span>首页</span>
 				</a>
 			</li>
-			<li class="treeview"><a href="#"><i class="fa fa-cog"></i>
+			<%-- <li class="treeview">
+				<a href="#">
+					<i class="fa fa-cog"></i>
 					<span>系统设置</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
-				</span> </a>
+					</span> 
+				</a>
 				<ul class="treeview-menu">
 					<li><a href="${requestContext.contextPath}/menu/"><i class="fa fa-circle-o"></i>菜单</a></li>
 					<li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
-				</ul>
-			</li>
+					<li><a href="${requestContext.contextPath}/menu/"><i class="fa fa-circle-o"></i>菜单</a></li>
+					<li><a href="#"><i class="fa fa-circle-o"></i>Link in level 2</a></li>
+				</ul>			
+			</li> --%>
 		</ul>
 	</section>
 </aside>
+
+<script src="${pageContext.request.contextPath}/js/leftMenu.js" ></script>
