@@ -81,7 +81,7 @@
 			var row = JucheapGrid.GetData();
 			if (row != null) {
 				$("#btnEdit").button("loading");
-				window.location.href = "/user/editPage/" + row.id;
+				window.location.href = "/user/getUserInfo/" + row.id;
 			} else {
 				parent.layer.alert("请选择要编辑的数据");
 			}
@@ -119,12 +119,12 @@
 				}, {
 					name : 'createTime',
 					index : 'createTime',
-					//formatter : formatDate,
+					formatter : formatDate,
 					width : 100,
 				}, {
 					name : 'status',
 					index : 'status',
-					//formatter : formatStatus,
+					formatter : formatStatus,
 					width : 100,
 				} ]
 			};

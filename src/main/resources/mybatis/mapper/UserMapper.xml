@@ -37,7 +37,7 @@
        	AND pswd = #{pswd}
 	</select>
 
-    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
        FROM u_user
