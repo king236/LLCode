@@ -132,17 +132,23 @@
         	<artifactId>jackson-dataformat-yaml</artifactId>  
     	</dependency>    -->
     	<!--jsp页面使用jstl标签-->
-		<dependency>
+		<!-- <dependency>
     		<groupId>javax.servlet</groupId>
     		<artifactId>jstl</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!--用于编译jsp-->
-		<dependency>
+		<!-- <dependency>
     		<groupId>org.apache.tomcat.embed</groupId>
     		<artifactId>tomcat-embed-jasper</artifactId>
     		<scope>provided</scope>
-		</dependency>
+		</dependency> -->
+		
+		<!-- 引入freeMarker的依赖包. -->  
+    	<dependency>     
+        	<groupId>org.springframework.boot</groupId>    
+        	<artifactId>spring-boot-starter-freemarker</artifactId>  
+    	</dependency>  
 	</dependencies>
 
 	<build>
