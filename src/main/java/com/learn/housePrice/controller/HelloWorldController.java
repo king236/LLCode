@@ -53,30 +53,30 @@ public class HelloWorldController {
         bean =new LearnResouce("林祥纤博客系列","从零开始学Spring Boot ","http://412887952-qq-com.iteye.com/category/356333");
         learnList.add(bean);
         ModelAndView modelAndView = new ModelAndView("/index");
-        modelAndView.addObject("learnList", learnList);
+     //   modelAndView.addObject("learnList", learnList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView login(){
-    	ModelAndView modelAndView = new ModelAndView("/login");
+    	ModelAndView modelAndView = new ModelAndView("/admin/login");
         return modelAndView;
     }
     
     @RequestMapping(value="/login", method = RequestMethod.POST)   
     @ResponseBody
-    public Result doLogin(Model model, User user, HttpSession session){
+    public String doLogin(Model model, User user, HttpSession session){
     	//model.addAttribute("userInfo", userDao.getUser(user));
     	Result result = new Result();
     	User userCheck = userDao.getUser(user);
     	if (userCheck != null) {
 			session.setAttribute("userInfo", userCheck);
-			result.setResult("success");
+			return "redirect:/admin/index";
+			//result.setResult("success");
 		} else {
 			session.removeAttribute("userInfo");
-			result.setResult("error");
-			result.setMessage("登录失败，用户名或者密码错误。");
+			model.addAttribute("message", "登录失败，用户名或者密码错误。");
+			return "/admin/login";
 		}
-    	return result;
     }
 }
