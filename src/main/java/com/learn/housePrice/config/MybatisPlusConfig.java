@@ -16,6 +16,8 @@ import com.baomidou.mybatisplus.plugins.parser.tenant.TenantSqlParser;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import com.baomidou.mybatisplus.spring.boot.starter.SpringBootVFS;
 import com.baomidou.mybatisplus.toolkit.PluginUtils;
+import com.github.pagehelper.PageHelper;
+
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
@@ -41,6 +43,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @Description : MybatisPlus配置
@@ -82,6 +85,9 @@ public class MybatisPlusConfig {
         MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
         mybatisPlus.setDataSource(dataSource);
         mybatisPlus.setVfs(SpringBootVFS.class);
+        
+        mybatisPlus.setPlugins(new Interceptor[] { pageHelper() });
+        
         if (StringUtils.hasText(this.properties.getConfigLocation())) {
             mybatisPlus.setConfigLocation(this.resourceLoader.getResource(this.properties.getConfigLocation()));
         }
@@ -111,5 +117,17 @@ public class MybatisPlusConfig {
             mybatisPlus.setMapperLocations(this.properties.resolveMapperLocations());
         }
         return mybatisPlus;
+    }
+    
+    @Bean
+    public PageHelper pageHelper() {
+        PageHelper pageHelper = new PageHelper();
+        Properties p = new Properties();
+        p.setProperty("offsetAsPageNum", "true");
+        p.setProperty("rowBoundsWithCount", "true");
+        p.setProperty("reasonable", "true");
+        p.setProperty("dialect", "mysql");
+        pageHelper.setProperties(p);
+        return pageHelper;
     }
 }

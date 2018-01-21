@@ -24,55 +24,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>jQuery Validate 简介</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>jquery.validate.js 是一款优秀的jQuery表单验证插件。它具有如下特点：</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>完整验证表单</h5>
-                    </div>
                     <div class="ibox-content">
                         <form class="form-horizontal m-t" id="frm" method="post" action="${ctx!}/admin/user/edit">
                         	<input type="hidden" id="id" name="id" value="${user.id}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">账户名：</label>
-                                <div class="col-sm-8">
-                                    <input id="userName" name="userName" class="form-control" type="text" value="${user.userName}" <#if user?exists> readonly="readonly"</#if> >
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-sm-3 control-label">昵称：</label>
                                 <div class="col-sm-8">
                                     <input id="nickName" name="nickName" class="form-control" type="text" value="${user.nickName}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">性别：</label>
-                                <div class="col-sm-8">
-                                	<select name="sex" class="form-control">
-                                		<option value="0" <#if user.sex == 0>selected="selected"</#if>>女</option>
-                                		<option value="1" <#if user.sex == 1>selected="selected"</#if>>男</option>
-                                	</select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">出生日期：</label>
-                                <div class="col-sm-8">
-                                    <input id="birthday" name="birthday" readonly="readonly" class="laydate-icon form-control layer-date" value="${user.birthday}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">电话：</label>
-                                <div class="col-sm-8">
-                                    <input id="telephone" name="telephone" class="form-control" value="${user.telephone}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -82,26 +40,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">地址：</label>
+                                <label class="col-sm-3 control-label">密码：</label>
                                 <div class="col-sm-8">
-                                    <input id="address" name="address" class="form-control" value="${user.address}">
+                                    <input id="pswd" name="pswd" class="form-control" value="${user.pswd}" type="password">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">状态：</label>
+                                <label class="col-sm-3 control-label">密码确认：</label>
                                 <div class="col-sm-8">
-                                	<select name="locked" class="form-control">
-                                		<option value="0" <#if user.locked == 0>selected="selected"</#if>>未锁定</option>
-                                		<option value="1" <#if user.locked == 1>selected="selected"</#if>>锁定</option>
-                                	</select>
+                                    <input id="pswd2" name="pswd2" class="form-control" value="${user.pswd}" type="password">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">描述：</label>
-                                <div class="col-sm-8">
-                                    <input id="description" name="description" class="form-control" value="${user.description}">
-                                </div>
-                            </div>
+                            </div>                           
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <button class="btn btn-primary" type="submit">提交</button>
@@ -131,50 +80,41 @@
     <script type="text/javascript">
     $(document).ready(function () {
 	  	//外部js调用
-	    laydate({
-	        elem: '#birthday', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
-	        event: 'focus' //响应事件。如果没有传入event，则按照默认的click
-	    });
+	    //laydate({
+	    //    elem: '#birthday', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+	    //    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+	    //});
 	  	
 	    $("#frm").validate({
-    	    rules: {
-    	    	userName: {
-    	        required: true,
-    	        minlength: 4,
-    	    	maxlength: 10
-    	      },
+    	    rules: {   	    
     	      	nickName: {
     	        required: true,
     	        minlength: 4,
     	    	maxlength: 10
-    	      },
-    	      	sex: {
-    	        required: true
-    	      },
-    	      	birthday: {
-    	      	date:true,
-    	        required: true
-    	      },
-    	      	telephone: {
-    	        required: true
-    	      },
+    	      },   	      	
     	      	email: {
     	      	email:true,
     	        required: true
-    	      },
-    	      	address: {
+    	      },,
+    	      	pswd2: {
     	        required: true,
-    	        maxlength: 40
+    	        minlength: 4,
+    	    	maxlength: 10,
+    	    	equalTo: "#pswd"
     	      },
-    	      	locked: {
-    	        required: true
-    	      },
-    	      	description: {
+    	      	pswd: {
     	        required: true,
-    	        maxlength: 40
+    	        minlength: 4,
+    	    	maxlength: 10
     	      }
     	    },
-    	    messages: {},
+    	    messages: {
+    	    	pswd2: {
+        			required: "请输入密码",
+       	 			minlength: "密码长度不能小于 5 个字母",
+        			equalTo: "两次密码输入不一致"
+      			}
+    	    },
     	    submitHandler:function(form){
     	    	$.ajax({
    	    		   type: "POST",

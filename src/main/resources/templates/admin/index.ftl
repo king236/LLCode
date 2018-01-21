@@ -60,21 +60,19 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                         <@shiro.hasPermission name="system:user:index">
+                         
                             <li>
                                <a class="J_menuItem" href="${ctx!}/admin/user/index">用户管理</a>
                             </li>
-                         </@shiro.hasPermission>
-                         <@shiro.hasPermission name="system:role:index">
+                         
                             <li>
                                 <a class="J_menuItem" href="${ctx!}/admin/role/index">角色管理</a>
                             </li>
-                         </@shiro.hasPermission>
-                         <@shiro.hasPermission name="system:resource:index">
+                        
                             <li>
                                 <a class="J_menuItem" href="${ctx!}/admin/resource/index">资源管理</a>
                             </li>
-                         </@shiro.hasPermission>
+                        
                         </ul>
                     </li>
                     <li class="line dk"></li>
@@ -91,14 +89,14 @@
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-user"></i> <span class="label label-primary"></span>【<@shiro.principal type="net.sppan.base.entity.User" property="nickName"/>】
+                                <i class="fa fa-user"></i> <span class="label label-primary"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
                                 <li>
                                     <a href="${ctx!}/admin/logout">
                                         <div>
                                             <i class="fa fa-remove"></i> 注销
-                                            <span class="pull-right text-muted small"><@shiro.principal type="net.sppan.base.entity.User" property="userName"/></span>
+                                            <span class="pull-right text-muted small"></span>
                                         </div>
                                     </a>
                                 </li>
