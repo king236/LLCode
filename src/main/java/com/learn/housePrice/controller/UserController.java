@@ -1,5 +1,6 @@
 package com.learn.housePrice.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.UserService;
+import com.learn.housePrice.util.Result;
 
 @Controller
 @RequestMapping("/admin/user")
@@ -28,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userMapper;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/index")
 	public String index(){
@@ -59,15 +65,31 @@ public class UserController {
 		return userPage;
 	}
 	
-	@RequestMapping("/getUserInfo/{id}")
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUserInfo(@PathVariable("id") Long id, Model model){
 		User user = userMapper.getOne(id);
 		model.addAttribute("user", user);
-		return "/user/edit";
+		return "admin/user/form";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(ModelMap map) {
 		return "admin/user/form";
+	}
+	
+	@RequestMapping(value= "/edit", method = RequestMethod.POST)
+	@ResponseBody
+	public Result edit(User user){
+		try {
+			if(user.getId() != null){
+				userMapper.update(user);
+			}else{
+				userMapper.insert(user);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return Result.failure(e.getMessage());
+		}
+		return Result.success("操作成功");
 	}
 }

@@ -85,14 +85,15 @@
 
     <update id="update" parameterType="com.learn.housePrice.entity.User" >
        UPDATE 
-            u_user
-       SET 
-        <if test="nickname != null">nickname = #{nickname},</if>
-        <if test="pswd != null">pswd = #{pswd},</if>
-        <if test="email != null">email = #{email},</if>
-        <if test="createTime != null">create_time = #{createTime},</if>
-        <if test="last_login_time != null">last_login_time = #{lastLoginTime},</if>
-        <if test="status != null">status = #{status},</if>
+            u_user     
+       <trim prefix="set" suffixOverrides=",">
+        	<if test="nickname != null">nickname = #{nickname},</if>
+        	<if test="pswd != null">pswd = #{pswd},</if>
+        	<if test="email != null">email = #{email},</if>
+        	<if test="createTime != null">create_time = #{createTime},</if>
+        	<if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+        	<if test="status != null">status = #{status},</if>
+       </trim>
        WHERE 
             id = #{id}
     </update>

@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">昵称：</label>
                                 <div class="col-sm-8">
-                                    <input id="nickName" name="nickName" class="form-control" type="text" value="${user.nickName}">
+                                    <input id="nickname" name="nickname" class="form-control" type="text" value="${user.nickName}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,7 +87,7 @@
 	  	
 	    $("#frm").validate({
     	    rules: {   	    
-    	      	nickName: {
+    	      	nickname: {
     	        required: true,
     	        minlength: 4,
     	    	maxlength: 10
@@ -95,7 +95,7 @@
     	      	email: {
     	      	email:true,
     	        required: true
-    	      },,
+    	      },
     	      	pswd2: {
     	        required: true,
     	        minlength: 4,
