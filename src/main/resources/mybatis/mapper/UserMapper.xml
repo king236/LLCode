@@ -98,7 +98,7 @@
             id = #{id}
     </update>
 
-    <delete id="delete" parameterType="java.lang.String" >
+    <delete id="delete" parameterType="Long" >
        DELETE FROM
              u_user 
        WHERE 
