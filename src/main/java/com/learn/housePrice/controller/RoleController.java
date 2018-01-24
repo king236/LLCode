@@ -61,8 +61,8 @@ public class RoleController {
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUserInfo(@PathVariable("id") Long id, Model model){
-		User user = userMapper.getOne(id);
-		model.addAttribute("user", user);
+		Role role = roleMapper.getOne(id);
+		model.addAttribute("role", role);
 		return "admin/user/form";
 	}
 	
@@ -75,7 +75,7 @@ public class RoleController {
 	@ResponseBody
 	public Result deleteUser(@PathVariable("id") Long id){
 		try {
-			userMapper.delete(id);
+			roleMapper.delete(id);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return Result.failure(e.getMessage());
@@ -85,12 +85,12 @@ public class RoleController {
 	
 	@RequestMapping(value= "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public Result edit(User user){
+	public Result edit(Role role){
 		try {
-			if(user.getId() != null){
-				userMapper.update(user);
+			if(role.getId() != null){
+				roleMapper.update(role);
 			}else{
-				userMapper.insert(user);
+				roleMapper.insert(role);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

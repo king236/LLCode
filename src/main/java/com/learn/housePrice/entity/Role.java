@@ -3,7 +3,11 @@ package com.learn.housePrice.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -19,6 +23,7 @@ public class Role {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value="id", type= IdType.AUTO)
 	private Long id;
     /**
      * 角色名称
@@ -27,7 +32,10 @@ public class Role {
     /**
      * 角色类型
      */
-	private String type;
+	@TableField("role_key")
+	private String roleKey;
+	
+	private String status;
 
 
 	public Long getId() {
@@ -46,20 +54,26 @@ public class Role {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
+	public String getRoleKey() {
+		return roleKey;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setRoleKey(String roleKey) {
+		this.roleKey = roleKey;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "Role{" +
-			", id=" + id +
-			", name=" + name +
-			", type=" + type +
-			"}";
+		return "Role [id=" + id + ", name=" + name + ", roleKey=" + roleKey + ", status=" + status + "]";
 	}
+
+	
 }

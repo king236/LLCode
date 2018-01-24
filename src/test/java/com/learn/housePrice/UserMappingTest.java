@@ -34,6 +34,17 @@ public class UserMappingTest {
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());  
 	@Test
+	public void testRoleInsert() throws Exception {
+		Role role = new Role();
+		role.setName("test");
+		role.setRoleKey("test");
+		role.setStatus("0");
+		
+		roleDao.insert(role);
+		
+		log.debug("insert success id=" + role.getId());
+	}
+	/*@Test
 	public void testInsert() throws Exception {
 		
 		
@@ -47,7 +58,7 @@ public class UserMappingTest {
 			
 			log.debug("insert u_user num = " + insetNum + " ,id = " + user.getId());
 
-	}
+	}*/
 
 /*	@Test
 	public void testQuery() throws Exception {
@@ -69,7 +80,7 @@ public class UserMappingTest {
 		Assert.assertTrue(("neo".equals(userDao.getOne(2L).getNickname())));
 	}*/
 	
-	@Test
+	/*@Test
 	public void selectByMap() throws Exception {
 		Map<String, Object> params = new HashMap<>();
 		params.put("nickname", "test13");
@@ -83,5 +94,5 @@ public class UserMappingTest {
 			List<Permission> permissionList = permissionDao.selectByMap(params);
 			log.info("permissionList = " + permissionList.toString());
 		}
-	}
+	}*/
 }

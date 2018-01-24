@@ -126,7 +126,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		List<Role> roleList = roleDao.selectByMap(map);
 		Set<String> roleSet = new HashSet<String>();
 		for(Role role : roleList){
-			roleSet.add(role.getType());
+			roleSet.add(role.getRoleKey());
 		}
 		roleSet.add("100002");//测试数据
 		info.setRoles(roleSet);

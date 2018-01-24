@@ -3,15 +3,20 @@
 <mapper namespace="com.learn.housePrice.dao.RoleDao">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.learn.housePrice.entity.Role">
+	<resultMap id="BaseResultMap" type="Role">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
-		<result column="type" property="type" />
+		<result column="role_key" property="roleKey" />
+		<result column="status" property="status" />
 	</resultMap>
+
+	<sql id="Base_Column_List" >
+        id, name, role_key, status
+    </sql>
 
 	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
 		SELECT 
-			t1.id, t1.name, t1.type
+			t1.id, t1.name, t1.role_key, t1.status
 		FROM
 			u_role t1
 		LEFT JOIN
@@ -21,5 +26,72 @@
 		WHERE
 			t2.uid = #{id}
 	</select>
+
+	<insert id="insert" parameterType="Role" 
+    	useGeneratedKeys="true" keyProperty="id">
+       <!-- ORCAL
+       <selectKey resultType="String" order="BEFORE" keyProperty="id">
+       		SELECT seq_on_all.nextval AS id from DUAL
+       </selectKey> -->
+       
+       <!-- mysql插入数据后，获取id
+                     方法一: 
+       <selectKey keyProperty="id" resultType="String" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+       </selectKey> 
+                     方法二：
+       useGeneratedKeys="true" keyProperty="id"              
+       -->
+       
+       <!-- alter table u_role modify column id int not null auto_increment primary key; -->
+   
+   		<selectKey keyProperty="id" resultType="Long" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+       </selectKey> 
+   
+       INSERT INTO u_role( 
+       		id,
+       		name,
+       		role_key,       		
+       		status) 
+        VALUES
+            (	#{id}, 
+            	#{name}, 
+            	#{roleKey},
+            	#{status} 
+            )
+    </insert>
+
+    <update id="update" parameterType="Role" >
+       UPDATE 
+            u_role     
+       <trim prefix="set" suffixOverrides=",">
+        	<if test="name != null">name = #{name},</if>
+        	<if test="roleKey != null">role_key = #{roleKey},</if>
+        	<if test="status != null">status = #{status},</if>
+       </trim>
+       WHERE 
+            id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long" >
+       DELETE FROM
+             u_role 
+       WHERE 
+             id =#{id}
+    </delete>
+    
+    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="Base_Column_List" />
+       FROM u_role
+       WHERE id = #{id}
+    </select>
+    
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM u_role
+    </select>
 
 </mapper>
