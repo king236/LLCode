@@ -70,7 +70,7 @@
                             </li>
                         
                             <li>
-                                <a class="J_menuItem" href="${ctx!}/admin/resource/index">资源管理</a>
+                                <a class="J_menuItem" href="${ctx!}/admin/permission/index">权限管理</a>
                             </li>
                         
                         </ul>

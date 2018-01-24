@@ -18,16 +18,15 @@ import com.learn.housePrice.entity.Menu;
 import com.learn.housePrice.util.Result;
 
 @Controller
-@RequestMapping(value="/menu")
+@RequestMapping(value="/admin/permission")
 public class MenuController {
 	
 	@Autowired
 	private MenuDao menuDao;
 	
-	@RequestMapping(value="/")
-	public String index(){
-		
-		return "/menu/menu_main";
+	@RequestMapping(value="/index")
+	public String index(){		
+		return "/admin/permission/index";
 	}
 	
 	@RequestMapping(value="/leftMenuData", method=RequestMethod.POST)

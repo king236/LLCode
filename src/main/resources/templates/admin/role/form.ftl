@@ -25,18 +25,6 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>jQuery Validate 简介</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>jquery.validate.js 是一款优秀的jQuery表单验证插件。它具有如下特点：</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
                         <h5>完整验证表单</h5>
                     </div>
                     <div class="ibox-content">
@@ -58,15 +46,9 @@
                                 <label class="col-sm-3 control-label">状态：</label>
                                 <div class="col-sm-8">
                                 	<select name="status" class="form-control">
-                                		<option value="0" <#if role.status == 0>selected="selected"</#if>>正常</option>
-                                		<option value="1" <#if role.status == 1>selected="selected"</#if>>禁用</option>
+                                		<option value="0" <#if role.status == '0'>selected="selected"</#if>>正常</option>
+                                		<option value="1" <#if role.status == '1'>selected="selected"</#if>>禁用</option>
                                 	</select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">描述：</label>
-                                <div class="col-sm-8">
-                                    <input id="description" name="description" class="form-control" value="${role.description}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -111,10 +93,6 @@
     	      },
     	        status: {
     	        required: true
-    	      },
-    	      	description: {
-    	        required: true,
-    	        maxlength: 40
     	      }
     	    },
     	    messages: {},

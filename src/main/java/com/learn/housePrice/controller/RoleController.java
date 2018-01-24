@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.learn.housePrice.dao.RoleDao;
-import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.Role;
-import com.learn.housePrice.entity.User;
-import com.learn.housePrice.service.UserService;
 import com.learn.housePrice.util.Result;
 
+@Controller
 @RequestMapping("/admin/role")
 public class RoleController {
 
@@ -63,12 +62,12 @@ public class RoleController {
 	public String getUserInfo(@PathVariable("id") Long id, Model model){
 		Role role = roleMapper.getOne(id);
 		model.addAttribute("role", role);
-		return "admin/user/form";
+		return "admin/role/form";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(ModelMap map) {
-		return "admin/user/form";
+		return "admin/role/form";
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
