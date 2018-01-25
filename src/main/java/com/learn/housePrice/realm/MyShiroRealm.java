@@ -134,7 +134,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		List<Permission> permissionList = permissionDao.selectByMap(map);
 		Set<String> permissionSet = new HashSet<String>();
 		for(Permission Permission : permissionList){
-			permissionSet.add(Permission.getName());
+			permissionSet.add(Permission.getPermissionName());
 		}
 		
 		permissionSet.add("权限添加");//测试数据

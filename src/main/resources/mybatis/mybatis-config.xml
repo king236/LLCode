@@ -35,5 +35,6 @@
         
         <!-- entity实体对应的class -->
         <typeAlias alias="Role" type="com.learn.housePrice.entity.Role"/>
+    	<typeAlias alias="Permission" type="com.learn.housePrice.entity.Permission"/>
     </typeAliases>
 </configuration>

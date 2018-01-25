@@ -5,20 +5,27 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.learn.housePrice.entity.Permission">
 		<id column="id" property="id" />
-		<result column="url" property="url" />
-		<result column="name" property="name" />
+		<result column="permission_name" property="permissionName" />
+		<result column="permission_url" property="permissionUrl" />
+		<result column="parent_id" property="parentId" />
+		<result column="permission_type" property="permissionType" />
+		<result column="sort" property="sort" />
 	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, permission_name, permission_url, parent_id, permission_type, sort
+	</sql>
 
 	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
 		SELECT 
-			t1.id, t1.url, t1.name
+			<include refid="Base_Column_List"></include>
 		FROM
 			u_permission t1
 		LEFT JOIN
 			(SELECT 
 				t2.pid as pid
 			FROM
-				u_role_permission t2, u_role t3
+				u_role_permission t2, u_permission t3
 			WHERE
 				t2.rid = t3.id 
 			AND 
@@ -26,5 +33,105 @@
 		ON
 			t1.id = t4.pid
 	</select>
+
+	<select id="getSortMax" parameterType="Permission" resultType="Long">
+    	SELECT IFNULL(MAX(sort), 0) AS maxNum
+    	FROM
+    		u_permission
+    	WHERE
+    		<if test="parentId != null">parent_id = #{parentId}</if> 
+    		<if test="parentId == null">parent_id is null</if>    		
+    </select>
+    
+    <select id="getPermissionChild" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    	SELECT * 
+    	FROM 
+    		u_permission
+    	WHERE
+    		parent_id = #{parentId}
+    	ORDER BY sort
+    </select>
+    
+    <select id="getPermissionParent" resultMap="BaseResultMap" >
+    	SELECT * 
+    	FROM 
+    		u_permission
+    	WHERE
+    		parent_id is null 
+    	ORDER BY sort    	
+    </select>
+
+	<insert id="insert" parameterType="Permission" 
+    	useGeneratedKeys="true" keyProperty="id">
+       <!-- ORCAL
+       <selectKey resultType="String" order="BEFORE" keyProperty="id">
+       		SELECT seq_on_all.nextval AS id from DUAL
+       </selectKey> -->
+       
+       <!-- mysql插入数据后，获取id
+                     方法一: 
+       <selectKey keyProperty="id" resultType="String" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+       </selectKey> 
+                     方法二：
+       useGeneratedKeys="true" keyProperty="id"              
+       -->
+       
+       <!-- alter table u_permission modify column id int not null auto_increment primary key; -->
+   
+   		<selectKey keyProperty="id" resultType="Long" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+       </selectKey> 
+   
+       INSERT INTO u_permission( 
+       		id,
+       		permission_name,
+       		permission_url,       		
+       		parent_id,
+       		permission_type,
+       		sort) 
+        VALUES
+            (	#{id}, 
+            	#{permissionName}, 
+            	#{permissionUrl},
+            	#{parentId}, 
+            	#{permissionType},
+            	#{sort} 
+            )
+    </insert>
+
+    <update id="update" parameterType="Permission" >
+       UPDATE 
+            u_permission     
+       <trim prefix="set" suffixOverrides=",">
+        	<if test="permissionName != null">permission_name = #{permissionName},</if>
+        	<if test="permissionUrl != null">permission_url = #{permissionUrl},</if>
+        	<if test="parentId != null">parent_id = #{parentId},</if>
+        	<if test="permissionType != null">permission_type = #{permissionType},</if>
+        	<if test="sort != null">sort = #{sort},</if>
+       </trim>
+       WHERE 
+            id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long" >
+       DELETE FROM
+             u_permission 
+       WHERE 
+             id =#{id}
+    </delete>
+    
+    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="Base_Column_List" />
+       FROM u_permission
+       WHERE id = #{id}
+    </select>
+    
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM u_permission
+    </select>
 
 </mapper>

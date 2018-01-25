@@ -80,35 +80,37 @@
         $(document).ready(function () {
 			//初始化表格,动态从服务器加载数据  
 			$("#table_list").bootstrapTable({
-			  
-			    url: '${ctx!}/admin/permission/getMenu',
-    toolbar: '#toolbar',
-    sidePagination: 'client',
-    pagination: false,
-    treeView: true,
-    treeId: "id",
-    treeField: "menuName",
-   // treeRootLevel: 1,
-    striped: true,
-    clickToSelect: true,
-    singleSelect: true,
-    //collapseIcon: "glyphicon glyphicon-triangle-right",//折叠样式
-    //expandIcon: "glyphicon glyphicon-triangle-bottom"//展开样式
-    columns: [{
-    			checkbox: true
-    		}, /*{
-            	field: 'Id',
-                title: '#',
-                width: '5%'
-            }, */{
-                field: 'menuName',
-                title: '权限名称',
-                width: '25%'
-            }, {
-                field: 'menuUrl',
-                title: '权限URL',
-                width: '35%'
-            }, {
+			    url: '${ctx!}/admin/permission/getPermission',
+    			toolbar: '#toolbar',
+    			sidePagination: 'client',
+    			pagination: false,
+    			treeView: true,
+    			treeId: "id",
+    			treeField: "menuName",
+   				//treeRootLevel: 1,
+    			striped: true,
+    			clickToSelect: true,
+    			singleSelect: true,
+    			//collapseIcon: "glyphicon glyphicon-triangle-right",//折叠样式
+    			//expandIcon: "glyphicon glyphicon-triangle-bottom"//展开样式
+    			columns: [{
+    				checkbox: true
+    			}, /*{
+            		field: 'Id',
+                	title: '#',
+               	 	width: '5%'
+            	}, */{
+                	field: 'name',
+                	title: '权限名称',
+                	width: '25%'
+            	}, {
+                	field: 'url',
+                	title: '权限URL',
+                	width: '35%'
+            	},{
+			     	title: "资源KEY",
+			     	field: "key"
+				}, {
 			        title: "资源类型",
 			        field: "type",
 			        formatter: function(value,row,index){
@@ -119,19 +121,19 @@
                     	else if(value == '2')
                     		return '<span class="label label-warning">按钮</span>';
 			        }
-			 }, {
-            	field:"shortcutOperation",
-            	title:"快捷操作",
-            	align: "center",
-            	formatter: function (value, row, index) {
+			 	}, {
+            		field:"shortcutOperation",
+            		title:"快捷操作",
+            		align: "center",
+            		formatter: function (value, row, index) {
             			var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
                     	operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button>';
                         return operateHtml;
-            	}
-           } ],
-    	onLoadSuccess:function(){
-    	 	$('#mySwitch input').bootstrapSwitch();  
-    	}  
+            		}
+           		} ],
+    			onLoadSuccess:function(){
+    	 			$('#mySwitch input').bootstrapSwitch();  
+    			}  
 			});
         });
         
