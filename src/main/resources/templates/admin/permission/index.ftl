@@ -14,9 +14,11 @@
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="${ctx!}/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="${ctx!}/assets/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="${ctx!}/assets/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
     <link href="${ctx!}/assets/css/animate.css" rel="stylesheet">
     <link href="${ctx!}/assets/css/style.css?v=4.1.0" rel="stylesheet">
-    <link href="${ctx!}/assets/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-switch/css/bootstrap-switch.css" />
 </head>
 
@@ -32,7 +34,7 @@
                         <p>
                         	
                         		<button class="btn btn-success " type="button" onclick="add();"><i class="fa fa-plus"></i>&nbsp;添加</button>
-                        	
+                        
                         </p>
                         <hr>
                         <div class="row row-lg">
@@ -56,6 +58,15 @@
     <script src="${ctx!}/assets/js/jquery.min.js?v=2.1.4"></script>
     <script src="${ctx!}/assets/js/bootstrap.min.js?v=3.3.6"></script>
 
+
+	<!-- Bootstrap table -->
+    <script src="${ctx!}/assets/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="${ctx!}/assets/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="${ctx!}/assets/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table-extends-tree.js" ></script>
+	<script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrap-switch.js" ></script>
+
     <!-- Peity -->
     <script src="${ctx!}/assets/js/plugins/peity/jquery.peity.min.js"></script>
 
@@ -63,36 +74,24 @@
 
     <!-- 自定义js -->
     <script src="${ctx!}/assets/js/content.js?v=1.0.0"></script>
-	<script src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table-extends-tree.js" ></script>
-	<script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrap-switch.js" ></script>
 
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
-        
-        	$('#table_list').bootstrapTable({
-	url: '/menu/getMenu',
+			//初始化表格,动态从服务器加载数据  
+			$("#table_list").bootstrapTable({
+			  
+			    url: '${ctx!}/admin/permission/getMenu',
+    toolbar: '#toolbar',
     sidePagination: 'client',
     pagination: false,
     treeView: true,
-    treeId: "id",   
+    treeId: "id",
     treeField: "menuName",
    // treeRootLevel: 1,
     striped: true,
     clickToSelect: true,
     singleSelect: true,
-    //表格显示条纹  
-			    striped: true,
-			    //启动分页  
-			    pagination: true,
-			    //每页显示的记录数  
-			    pageSize: 10,
-			    //当前第几页  
-			    pageNumber: 1,
-			    //记录数可选列表  
-			    pageList: [5, 10, 15, 20, 25],
-			    //是否启用查询  
-			    search: true,
     //collapseIcon: "glyphicon glyphicon-triangle-right",//折叠样式
     //expandIcon: "glyphicon glyphicon-triangle-bottom"//展开样式
     columns: [{
@@ -103,53 +102,43 @@
                 width: '5%'
             }, */{
                 field: 'menuName',
-                title: '菜单名称',
+                title: '权限名称',
                 width: '25%'
             }, {
                 field: 'menuUrl',
-                title: '菜单URL',
+                title: '权限URL',
                 width: '35%'
-            }/*, {
-                field: 'Level',
-                title: '部门级别',
-              //  width: '80px'
-            }*/, {
-            	field: 'status',
-                title: '状态',
-                formatter: function(v,r,i){
-                	var str = '';
-                	if(v == '1'){
-                		str = '<div class="switch"  id="mySwitch" >  ' + 
-								'<input type="checkbox" checked  data-on-color="success" data-off-color="warning" data-on-text="启用" data-off-text="禁用"/>  '+
-								'</div>  ';
-                	}else if(v == '0'){
-                		str = '<div class="switch"  id="mySwitch" >  ' + 
-								'<input type="checkbox" data-on-color="success" data-off-color="warning" data-on-text="启用" data-off-text="禁用"/>  '+
-								'</div>  ';
-                	}               
-                	return str;
-                }
             }, {
+			        title: "资源类型",
+			        field: "type",
+			        formatter: function(value,row,index){
+			        	if(value == '0')
+                    		return '<span class="label label-info">目录</span>';
+                    	else if(value == '1')
+                    		return '<span class="label label-primary">菜单</span>';
+                    	else if(value == '2')
+                    		return '<span class="label label-warning">按钮</span>';
+			        }
+			 }, {
             	field:"shortcutOperation",
             	title:"快捷操作",
             	align: "center",
-            	formatter: function(v,r,i){
-            		var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
+            	formatter: function (value, row, index) {
+            			var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
                     	operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button>';
                         return operateHtml;
             	}
            } ],
-    onLoadSuccess:function(){
-    	 $('#mySwitch input').bootstrapSwitch();  
-    }       
-});
-        
+    	onLoadSuccess:function(){
+    	 	$('#mySwitch input').bootstrapSwitch();  
+    	}  
+			});
         });
         
         function edit(id){
         	layer.open({
         	      type: 2,
-        	      title: '资源修改',
+        	      title: '权限修改',
         	      shadeClose: true,
         	      shade: false,
         	      area: ['893px', '600px'],
@@ -162,7 +151,7 @@
         function add(){
         	layer.open({
         	      type: 2,
-        	      title: '资源添加',
+        	      title: '权限添加',
         	      shadeClose: true,
         	      shade: false,
         	      area: ['893px', '600px'],
