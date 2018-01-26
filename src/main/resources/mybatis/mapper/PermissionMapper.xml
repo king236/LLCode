@@ -7,13 +7,14 @@
 		<id column="id" property="id" />
 		<result column="permission_name" property="permissionName" />
 		<result column="permission_url" property="permissionUrl" />
+		<result column="permission_key" property="permissionKey" />
 		<result column="parent_id" property="parentId" />
 		<result column="permission_type" property="permissionType" />
 		<result column="sort" property="sort" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, permission_name, permission_url, parent_id, permission_type, sort
+		id, permission_name, permission_url, permission_key, parent_id, permission_type, sort
 	</sql>
 
 	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
@@ -89,6 +90,7 @@
        		permission_url,       		
        		parent_id,
        		permission_type,
+       		permission_key,
        		sort) 
         VALUES
             (	#{id}, 
@@ -96,6 +98,7 @@
             	#{permissionUrl},
             	#{parentId}, 
             	#{permissionType},
+            	#{permissionKey},
             	#{sort} 
             )
     </insert>
@@ -106,6 +109,7 @@
        <trim prefix="set" suffixOverrides=",">
         	<if test="permissionName != null">permission_name = #{permissionName},</if>
         	<if test="permissionUrl != null">permission_url = #{permissionUrl},</if>
+        	<if test="permissionKey != null">permission_key = #{permissionKey},</if>
         	<if test="parentId != null">parent_id = #{parentId},</if>
         	<if test="permissionType != null">permission_type = #{permissionType},</if>
         	<if test="sort != null">sort = #{sort},</if>

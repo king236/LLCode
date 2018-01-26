@@ -8,6 +8,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,10 +56,9 @@ public class PermissionController {
 	 	return permissionAll;
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/save", method=RequestMethod.POST)
 	@ResponseBody
 	public Result addPermission(Permission permission){
-		Result result = new Result();
 		try {
 			if(StringUtils.isBlank(permission.getParentId())){
 				permission.setParentId(null);
@@ -65,18 +67,22 @@ public class PermissionController {
 			permission.setSort((Long)(maxSort+1));
 			Long id = permissionDao.insert(permission);
 			if(id == 1L){
-				result.setResult("success");
+				return Result.success("权限插入成功");
 			}else{
-				result.setResult("error");
-				result.setMessage("菜单插入失败。");
+				return Result.failure("权限插入失败");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			result.setResult("error");
-			result.setMessage(e.getMessage());
+			return Result.failure(e.getMessage());
 		}
-		
-		return result;
+	}
+	
+	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
+	public String add(@PathVariable Long id, Model model) {
+		if(id > 0){
+			model.addAttribute("permission", permissionDao.getOne(id));
+		}
+		return "admin/permission/form";
 	}
 	
 	@RequestMapping(value="/getPermission", method=RequestMethod.GET)

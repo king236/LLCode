@@ -25,6 +25,8 @@ public class Permission {
 	private String permissionName;
 	@TableField("permission_url")
 	private String permissionUrl;
+	@TableField("permission_key")
+	private String permissionKey;
 	@TableField("parent_id")
 	private String parentId;
 	@TableField("permission_type")
@@ -55,6 +57,14 @@ public class Permission {
 		this.permissionUrl = permissionUrl;
 	}
 
+	public String getPermissionKey() {
+		return permissionKey;
+	}
+
+	public void setPermissionKey(String permissionKey) {
+		this.permissionKey = permissionKey;
+	}
+
 	public String getParentId() {
 		return parentId;
 	}
@@ -82,8 +92,9 @@ public class Permission {
 	@Override
 	public String toString() {
 		return "Permission [id=" + id + ", permissionName=" + permissionName + ", permissionUrl=" + permissionUrl
-				+ ", parentId=" + parentId + ", permissionType=" + permissionType + ", sort=" + sort + "]";
+				+ ", permissionKey=" + permissionKey + ", parentId=" + parentId + ", permissionType=" + permissionType
+				+ ", sort=" + sort + "]";
 	}
-
+	
 	
 }

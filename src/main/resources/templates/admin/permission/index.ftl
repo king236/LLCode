@@ -100,19 +100,19 @@
                 	title: '#',
                	 	width: '5%'
             	}, */{
-                	field: 'name',
+                	field: 'permissionName',
                 	title: '权限名称',
                 	width: '25%'
             	}, {
-                	field: 'url',
+                	field: 'permissionUrl',
                 	title: '权限URL',
                 	width: '35%'
             	},{
 			     	title: "资源KEY",
-			     	field: "key"
+			     	field: "permissionKey"
 				}, {
 			        title: "资源类型",
-			        field: "type",
+			        field: "permissionType",
 			        formatter: function(value,row,index){
 			        	if(value == '0')
                     		return '<span class="label label-info">目录</span>';
@@ -144,20 +144,25 @@
         	      shadeClose: true,
         	      shade: false,
         	      area: ['893px', '600px'],
-        	      content: '${ctx!}/admin/resource/edit/' + id,
+        	      content: '${ctx!}/admin/permission/edit/' + id,
         	      end: function(index){
         	    	  $('#table_list').bootstrapTable("refresh");
        	    	  }
         	    });
         }
         function add(){
+       	 	var row = $('#table_list').bootstrapTable('getSelections');
+       	 	var id = -1;
+			if(row.length > 0){
+				id = row[0].id;
+			}
         	layer.open({
         	      type: 2,
         	      title: '权限添加',
         	      shadeClose: true,
         	      shade: false,
         	      area: ['893px', '600px'],
-        	      content: '${ctx!}/admin/resource/add',
+        	      content: '${ctx!}/admin/permission/add/' + id,
         	      end: function(index){
         	    	  $('#table_list').bootstrapTable("refresh");
        	    	  }
@@ -168,7 +173,7 @@
         		$.ajax({
     	    		   type: "POST",
     	    		   dataType: "json",
-    	    		   url: "${ctx!}/admin/resource/delete/" + id,
+    	    		   url: "${ctx!}/admin/permission/delete/" + id,
     	    		   success: function(msg){
 	 	   	    			layer.msg(msg.message, {time: 2000},function(){
 	 	   	    				$('#table_list').bootstrapTable("refresh");
