@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.learn.housePrice.dao.MenuDao;
 import com.learn.housePrice.dao.PermissionDao;
+import com.learn.housePrice.entity.Menu;
 import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.util.Result;
 
@@ -26,6 +28,8 @@ public class PermissionController {
 	
 	@Autowired
 	private PermissionDao permissionDao;
+	@Autowired
+	private MenuDao menuDao;
 	
 	@RequestMapping(value="/index")
 	public String index(){		
@@ -60,9 +64,9 @@ public class PermissionController {
 	@ResponseBody
 	public Result addPermission(Permission permission){
 		try {
-			if(StringUtils.isBlank(permission.getParentId())){
-				permission.setParentId(null);
-			}
+			//if(StringUtils.isBlank(permission.getParentId())){
+			//	permission.setParentId(null);
+			//}
 			Long maxSort = permissionDao.getSortMax(permission);
 			permission.setSort((Long)(maxSort+1));
 			Long id = permissionDao.insert(permission);
@@ -85,11 +89,49 @@ public class PermissionController {
 		return "admin/permission/form";
 	}
 	
-	@RequestMapping(value="/getPermission", method=RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable Long id, Model model) {
+		try {
+			Permission permission = permissionDao.getOne(id);
+			if( permission.getParentId() != 0 ){
+				model.addAttribute("permissionParent", permissionDao.getOne(permission.getParentId()));
+			}
+			model.addAttribute("permission", permissionDao.getOne(id));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "admin/permission/edit";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@ResponseBody
+	public Result edit(Permission permission){
+		try {
+			permissionDao.update(permission);
+			return Result.success("修改成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			return Result.failure(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Result delete(@PathVariable Long id){
+		try {
+			permissionDao.delete(id);
+			return Result.success("删除成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			return Result.failure(e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value="/getPermission", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Permission> getPermission(){
 		
-		List<Permission> permissionParentList = permissionDao.getPermissionParent();
+		/*List<Permission> permissionParentList = permissionDao.getPermissionParent();
 		List<Permission> permissionAllList = new ArrayList<Permission>();
 		if(permissionParentList != null && permissionParentList.size() > 0){
 			for(Permission permission : permissionParentList){
@@ -101,7 +143,28 @@ public class PermissionController {
 					permissionAllList.addAll(permissionChildList);					
 				}
 			}
+		}*/
+	 	return permissionDao.getAll();
+	}
+	
+	
+	@RequestMapping(value="getMenu", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Menu> getMenu(){
+		
+		List<Menu> menuParentList = menuDao.getMenuParent();
+		List<Menu> menuAllList = new ArrayList<Menu>();
+		if(menuParentList != null && menuParentList.size() > 0){
+			for(Menu menu : menuParentList){
+				menuAllList.add(menu);
+				Map<String,Object> params = new HashMap<>();
+				params.put("parentMenuId", menu.getId());
+				List<Menu> menuChildList = menuDao.getMenuChild(params);
+				if(menuChildList != null && menuChildList.size() > 0){
+					menuAllList.addAll(menuChildList);					
+				}
+			}
 		}
-	 	return permissionAllList;
+	 	return menuAllList;
 	}
 }

@@ -74,7 +74,7 @@
     var getParent = function (node, source, field) {
         var data = [];
         var items = $.grep(source, function (item, index) {
-            return node.parentMenuId == item[field];
+            return node.parentId == item[field];
         });
         $.each(items, function (index, item) {
             data.splice(0, 0, item);
@@ -89,7 +89,7 @@
     var getChild = function (node, source, field) {
         var data = [];
         var items = $.grep(source, function (item, index) {
-            return item.parentMenuId == node[field];
+            return item.parentId == node[field];
         });
 
         $.each(items, function (index, item) {
@@ -114,9 +114,9 @@
         var that = this;
         if (that.options.treeView && this.data.length > 0) {
             var rows = [];
-           /* var roots = $.grep(this.data, function (row, index) {
-                return row.Level == that.options.treeRootLevel;
-            });*/
+           var roots = $.grep(this.data, function (row, index) {
+                return row.permissionType == that.options.treeRootLevel+"";
+            });
             $.each(this.data, function (index, item) {
             	if(checkExist(rows, item)){
             		return true;
@@ -313,9 +313,9 @@
                     var indent, icon;
                     var index = 1;
                     if (that.options.treeView && column.field == that.options.treeField) {
-                        var indent = item.parentMenuId == null ? '' : sprintf('<span style="margin-left: %spx;"></span>', (index++) * 15);
+                        var indent = item.parentId == null ? '' : sprintf('<span style="margin-left: %spx;"></span>', (index++) * 15);
                         var child = $.grep(data, function (d, i) {
-                            return d.parentMenuId == item[that.options.treeId] && !d.hidden;
+                            return d.parentId == item[that.options.treeId] && !d.hidden;
                         });
                         icon = sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5px;"></span>', child.length > 0 ? that.options.expandIcon : that.options.collapseIcon);
                         //icon = sprintf('<span class="tree-icon %s" style="cursor: pointer; margin: 0px 5px;"></span>', child.length > 0 ? that.options.expandIcon : "");
@@ -431,7 +431,7 @@
             that.options.data = that.data;
             that.initBody(true);
             //*************//
-            reloadSwitch();
+            //reloadSwitch();
         });
 
         this.$selectItem = this.$body.find(sprintf('[name="%s"]', this.options.selectItemName));
@@ -508,7 +508,7 @@
         treeView: false,//treeView视图
         treeField: "id",//treeView视图字段
         treeId: "id",
-       // treeRootLevel: 0,//根节点序号
+        treeRootLevel: 0,//根节点序号
         treeCollapseAll: false,//是否全部展开
         collapseIcon: "glyphicon glyphicon-chevron-right",//折叠样式
         expandIcon: "glyphicon glyphicon-chevron-down"//展开样式

@@ -28,7 +28,7 @@ public class Permission {
 	@TableField("permission_key")
 	private String permissionKey;
 	@TableField("parent_id")
-	private String parentId;
+	private Long parentId;
 	@TableField("permission_type")
 	private String permissionType;
 	private Long sort;
@@ -65,11 +65,11 @@ public class Permission {
 		this.permissionKey = permissionKey;
 	}
 
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

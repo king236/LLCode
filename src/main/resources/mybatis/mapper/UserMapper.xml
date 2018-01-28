@@ -11,6 +11,8 @@
    		<result column="status" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
+	
+
     <sql id="Base_Column_List" >
         id, nickname, email, pswd, create_time, last_login_time, status
     </sql>
@@ -104,4 +106,26 @@
        WHERE 
              id =#{id}
     </delete>
+    
+    <select id="getRoles" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		rid
+    	FROM
+    		u_user_role
+    	WHERE
+    		uid = #{userId}
+    </select>
+    
+    <select id="getRoles" parameterType="Long" resultType="String">
+    	SELECT
+    	 	t1.name 
+    	FROM 
+    		u_role t1 
+    	LEFT JOIN 
+    		u_user_role t2 
+    	ON 
+    		t1.id = t2.rid
+    	WHERE 
+    		t2.uid = #{userId}
+    </select>
 </mapper>

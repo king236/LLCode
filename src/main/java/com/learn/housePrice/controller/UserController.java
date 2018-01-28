@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.learn.housePrice.dao.RoleDao;
 import com.learn.housePrice.dao.UserDao;
+import com.learn.housePrice.dao.UserRoleDao;
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.service.UserService;
 import com.learn.housePrice.util.Result;
@@ -32,6 +34,12 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userMapper;
+	
+	@Autowired
+	private RoleDao roleMapper;
+	
+	@Autowired
+	private UserRoleDao userRoleMapper;
 	
 	@Autowired
 	private UserService userService;
@@ -63,6 +71,13 @@ public class UserController {
     		e.printStackTrace();
     	}
     	PageHelper.startPage(page, size);
+    	List<User> userList = userMapper.getAll();
+    	if(!userList.isEmpty()){
+    		for(User user : userList){
+    			List<String> roles = userMapper.getRoles(user.getId());
+    			//user.显示角色出现错误
+    		}
+    	}
     	PageInfo<User> userPage = new PageInfo<>(userMapper.getAll());
 		return userPage;
 	}
@@ -91,7 +106,7 @@ public class UserController {
 		return Result.success("操作成功");
 	}
 	
-	@RequestMapping(value= "/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
 	public Result edit(User user){
 		try {
@@ -105,5 +120,30 @@ public class UserController {
 			return Result.failure(e.getMessage());
 		}
 		return Result.success("操作成功");
+	}
+	
+	@RequestMapping(value = "/grant/{id}", method = RequestMethod.GET)
+	public String grant(@PathVariable Long id, Model model){
+		try{
+			model.addAttribute("user", userMapper.getOne(id));
+			model.addAttribute("roles", roleMapper.getAll());
+			model.addAttribute("roleIds", userMapper.getRoles());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "/admin/user/grant";
+	}
+	
+	@RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Result grant(@PathVariable Long id, Long [] roleIds){
+		try {
+			userRoleMapper.grantUserRoles(id, roleIds);
+			return Result.success("关联角色成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return Result.failure("关联角色失败");
+		}
 	}
 }

@@ -34,7 +34,8 @@
                         <p>
                         	
                         		<button class="btn btn-success " type="button" onclick="add();"><i class="fa fa-plus"></i>&nbsp;添加</button>
-                        
+                        		<button class="btn btn-success " type="button" onclick="expandAllTree();"><i class="fa fa-plus"></i>&nbsp;展开全部</button>
+                        		<button class="btn btn-success " type="button" onclick="collapseAllTree();"><i class="fa fa-plus"></i>&nbsp;折叠所有</button>
                         </p>
                         <hr>
                         <div class="row row-lg">
@@ -63,8 +64,10 @@
     <script src="${ctx!}/assets/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="${ctx!}/assets/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="${ctx!}/assets/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
+	<!--
 	<script src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table-extends-tree.js" ></script>
+	-->
+	<script src="${pageContext.request.contextPath}/bootstrap-table/dist/bootstrap-table-treeview.js" ></script>
 	<script src="${pageContext.request.contextPath}/bootstrap-switch/js/bootstrap-switch.js" ></script>
 
     <!-- Peity -->
@@ -80,17 +83,15 @@
         $(document).ready(function () {
 			//初始化表格,动态从服务器加载数据  
 			$("#table_list").bootstrapTable({
+				class: 'table table-hover table-bordered',
 			    url: '${ctx!}/admin/permission/getPermission',
     			toolbar: '#toolbar',
     			sidePagination: 'client',
     			pagination: false,
     			treeView: true,
     			treeId: "id",
-    			treeField: "menuName",
-   				//treeRootLevel: 1,
-    			striped: true,
-    			clickToSelect: true,
-    			singleSelect: true,
+    			treeField: "permissionName",   				
+    			expandAllTree: true,
     			//collapseIcon: "glyphicon glyphicon-triangle-right",//折叠样式
     			//expandIcon: "glyphicon glyphicon-triangle-bottom"//展开样式
     			columns: [{
@@ -102,17 +103,19 @@
             	}, */{
                 	field: 'permissionName',
                 	title: '权限名称',
-                	width: '25%'
+                	width: '20%'
             	}, {
                 	field: 'permissionUrl',
                 	title: '权限URL',
-                	width: '35%'
+                	width: '20%'
             	},{
-			     	title: "资源KEY",
-			     	field: "permissionKey"
+			     	title: "权限KEY",
+			     	field: "permissionKey",
+			     	width: '20%'
 				}, {
-			        title: "资源类型",
+			        title: "权限类型",
 			        field: "permissionType",
+			        align: "center",
 			        formatter: function(value,row,index){
 			        	if(value == '0')
                     		return '<span class="label label-info">目录</span>';
@@ -131,11 +134,22 @@
                         return operateHtml;
             		}
            		} ],
-    			onLoadSuccess:function(){
-    	 			$('#mySwitch input').bootstrapSwitch();  
-    			}  
+    			//onLoadSuccess:function(){
+    	 		//	$('#mySwitch input').bootstrapSwitch();  
+    			//}  
 			});
+			
+			//$('#table_list').bootstrapTable("expandAllTree");
+			//$('#table_list').bootstrapTable("collapseAllTree");
         });
+        
+        function collapseAllTree(){
+        	$('#table_list').bootstrapTable("collapseAllTree");
+        }
+        
+        function expandAllTree(){
+        	$('#table_list').bootstrapTable("expandAllTree");
+        }
         
         function edit(id){
         	layer.open({

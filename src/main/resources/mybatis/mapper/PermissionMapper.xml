@@ -136,6 +136,7 @@
        SELECT 
        <include refid="Base_Column_List" />
        FROM u_permission
+       ORDER BY permission_type,parent_id,sort
     </select>
 
 </mapper>

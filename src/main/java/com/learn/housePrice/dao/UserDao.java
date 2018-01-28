@@ -3,6 +3,7 @@ package com.learn.housePrice.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
 
 public interface UserDao {
@@ -20,4 +21,8 @@ public interface UserDao {
 	List<User> selectByMap(Map<String, Object> params);
 	
 	User getUser(User user);
+	
+	List<Long> getRoles();
+	
+	List<String> getRoles(Long userId);
 }

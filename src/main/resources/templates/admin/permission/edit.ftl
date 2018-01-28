@@ -25,82 +25,52 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>资源编辑</h5>
+                        <h5>权限编辑</h5>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="frm" method="post" action="${ctx!}/admin/permission/edit">
-                        	<input type="hidden" id="id" name="id" value="${permission.id}">
+                        <form class="form-horizontal m-t" id="frm" method="post" action="${ctx!}/admin/permission/edit">                     	
+                            <input type="hidden" id="id" name="id" value="${permission.id}">
+                            <#if permissionParent != null>
                             <div class="form-group">
-                               <label class="col-sm-3 control-label">上级资源：</label>
+                               	<label class="col-sm-3 control-label">父权限：</label>
                                 <div class="col-sm-8">
-                                	<select name="parent.id" class="form-control">
-                                		<#list list as r>
-                                			<option value="${r.id}" <#if permission.parent.id == r.id>selected="selected"</#if>>
-                                				<#if r.level == 1>|-<#elseif  r.level == 2>　|-<#else>　　|-</#if>${r.name}
-                                			</option>
-                                		</#list>
-                                	</select>
+                                	<input type="hidden" id="parentId" name="parentId" value="${permission.parentId}">
+                                	<input class="form-control" type="text" readonly value="${permissionParent.permissionName}">
                                 </div>
                             </div>
+                            </#if>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">资源名称：</label>
+                                <label class="col-sm-3 control-label">权限名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="name" name="name" class="form-control" type="text" value="${permission.name}">
+                                    <input id="permissionName" name="permissionName" class="form-control" type="text" value="${permission.permissionName}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">唯一标识：</label>
                                 <div class="col-sm-8">
-                                    <input id="sourceKey" name="sourceKey" class="form-control" type="text" value="${permission.sourceKey}">
+                                    <input id="permissionKey" name="permissionKey" class="form-control" type="text" value="${permission.permissionKey}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">资源类型：</label>
+                                <label class="col-sm-3 control-label">权限类型：</label>
                                 <div class="col-sm-8">
-                                	<select name="type" class="form-control">
-                                		<option value="0" <#if permission.type == 0>selected="selected"</#if>>目录</option>
-                                		<option value="1" <#if permission.type == 1>selected="selected"</#if>>菜单</option>
-                                		<option value="2" <#if permission.type == 2>selected="selected"</#if>>按钮</option>
+                                	<select name="permissionType" class="form-control" value="${permission.permissionType}">
+                                		<option value="0" <#if permission.permissionType == "0" >selected="selected"</#if>>目录</option>
+                                		<option value="1" <#if permission.permissionType == "1" >selected="selected"</#if>>菜单</option>
+                                		<option value="2" <#if permission.permissionType == "2" >selected="selected"</#if>>按钮</option>
                                 	</select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">资源url：</label>
+                                <label class="col-sm-3 control-label">权限url：</label>
                                 <div class="col-sm-8">
-                                    <input id="sourceUrl" name="sourceUrl" class="form-control" value="${permission.sourceUrl}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">层级：</label>
-                                <div class="col-sm-8">
-                                    <input id="level" name="level" class="form-control" value="${permission.level}" placeholder="目录：1，菜单：2，按钮：3">
+                                    <input id="permissionUrl" name="permissionUrl" class="form-control" value="${permission.permissionUrl}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">排序：</label>
                                 <div class="col-sm-8">
                                     <input id="sort" name="sort" class="form-control" value="${permission.sort}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">图标：</label>
-                                <div class="col-sm-8">
-                                    <input id="icon" name="icon" class="form-control" value="${permission.icon}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">状态：</label>
-                                <div class="col-sm-8">
-                                	<select name="isHide" class="form-control">
-                                		<option value="0" <#if permission.locked == 0>selected="selected"</#if>>显示</option>
-                                		<option value="1" <#if permission.locked == 1>selected="selected"</#if>>隐藏</option>
-                                	</select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">描述：</label>
-                                <div class="col-sm-8">
-                                    <input id="description" name="description" class="form-control" value="${permission.description}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -134,39 +104,25 @@
 	  	
 	    $("#frm").validate({
     	    rules: {
-    	    	name: {
+    	    	permissionName: {
     	        required: true,
     	        minlength: 4,
     	    	maxlength: 20
     	      },
-    	      	sourceKey: {
+    	      	permissionKey: {
     	        required: true,
     	        minlength: 4,
     	    	maxlength: 40
     	      },
-    	      	type: {
+    	      	permissionType: {
     	        required: true
     	      },
-    	      	sourceUrl: {
+    	      	permissionUrl: {
     	        required: true
-    	      },
-    	      	level: {
-    	        required: true,
-    	        number:true
     	      },
     	      	sort: {
     	      	number:true,
     	        required: true
-    	      },
-    	      	icon: {
-    	        maxlength: 40
-    	      },
-    	      	isHide: {
-    	        required: true
-    	      },
-    	      	description: {
-    	        required: true,
-    	        maxlength: 40
     	      }
     	    },
     	    messages: {},
