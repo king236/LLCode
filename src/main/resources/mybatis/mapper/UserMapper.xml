@@ -6,18 +6,20 @@
         <result column="nickname" property="nickname" jdbcType="VARCHAR" />
         <result column="pswd" property="pswd" jdbcType="VARCHAR" />     
         <result column="email" property="email" jdbcType="VARCHAR" />
-        <result column="create_time" property="createTime" jdbcType="DATE" />
-   		<result column="last_login_time" property="lastLoginTime" jdbcType="DATE" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+   		<result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
    		<result column="status" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
-	
+	<resultMap id="ResultMapRoles" type="com.learn.housePrice.entity.User" extends="BaseResultMap">  
+    	<collection property="userRoles" column="id" select="com.learn.housePrice.dao.RoleDao.findRolesByUserId"/>  
+	</resultMap> 
 
     <sql id="Base_Column_List" >
         id, nickname, email, pswd, create_time, last_login_time, status
     </sql>
 
-    <select id="getAll" resultMap="BaseResultMap"  >
+    <select id="getAll" resultMap="ResultMapRoles"  >
        SELECT 
        <include refid="Base_Column_List" />
        FROM u_user
@@ -116,7 +118,7 @@
     		uid = #{userId}
     </select>
     
-    <select id="getRoles" parameterType="Long" resultType="String">
+    <select id="getRolesName" parameterType="Long" resultType="String">
     	SELECT
     	 	t1.name 
     	FROM 

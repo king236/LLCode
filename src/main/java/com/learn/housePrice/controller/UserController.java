@@ -72,13 +72,7 @@ public class UserController {
     	}
     	PageHelper.startPage(page, size);
     	List<User> userList = userMapper.getAll();
-    	if(!userList.isEmpty()){
-    		for(User user : userList){
-    			List<String> roles = userMapper.getRoles(user.getId());
-    			//user.显示角色出现错误
-    		}
-    	}
-    	PageInfo<User> userPage = new PageInfo<>(userMapper.getAll());
+    	PageInfo<User> userPage = new PageInfo<>(userList);
 		return userPage;
 	}
 	
@@ -99,6 +93,7 @@ public class UserController {
 	public Result deleteUser(@PathVariable("id") Long id){
 		try {
 			userMapper.delete(id);
+			userRoleMapper.deleteRoleByUserId(id);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return Result.failure(e.getMessage());
@@ -113,6 +108,8 @@ public class UserController {
 			if(user.getId() != null){
 				userMapper.update(user);
 			}else{
+				user.setCreateTime(new Date());
+				user.setStatus("0");
 				userMapper.insert(user);
 			}
 		} catch (Exception e) {
@@ -127,7 +124,7 @@ public class UserController {
 		try{
 			model.addAttribute("user", userMapper.getOne(id));
 			model.addAttribute("roles", roleMapper.getAll());
-			model.addAttribute("roleIds", userMapper.getRoles());
+			model.addAttribute("roleIds", userMapper.getRoles(id));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

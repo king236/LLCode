@@ -94,4 +94,23 @@
        FROM u_role
     </select>
 
+	<select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM u_role
+    </select>
+
+	<select id="findRolesByUserId" parameterType="Long" resultMap="BaseResultMap">
+		SELECT 
+			t1.id, t1.name, t1.role_key, t1.status
+		FROM
+			u_role t1
+		LEFT JOIN
+			u_user_role t2
+		ON
+			t1.id = t2.rid
+		WHERE
+			t2.uid = #{userId}
+	</select>
+
 </mapper>

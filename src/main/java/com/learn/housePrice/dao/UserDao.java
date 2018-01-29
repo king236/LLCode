@@ -22,7 +22,7 @@ public interface UserDao {
 	
 	User getUser(User user);
 	
-	List<Long> getRoles();
-	
-	List<String> getRoles(Long userId);
+	List<Long> getRoles(Long userId);
+
+	List<String> getRolesName(Long userId);
 }

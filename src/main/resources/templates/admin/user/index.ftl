@@ -120,7 +120,7 @@
 			        field: "nickname"
 			    },{
 			        title: "所属角色",
-			        field: "roles",
+			        field: "userRoles",
 			        formatter: function(value, row, index) {
                     	var r = "";
                     	$(value).each(function (index,role){

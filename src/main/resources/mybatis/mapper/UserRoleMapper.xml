@@ -9,4 +9,16 @@
     		(#{userId}, #{item})
   		</foreach>
 	</insert>
+	
+	<delete id="deleteRoleByUserId" parameterType="Long"> 
+		DELETE	FROM
+			u_user_role
+		WHERE uid = #{userId}		
+	</delete>
+	
+	<delete id="deleteRoleByRoleId" parameterType="Long"> 
+		DELETE	FROM
+			u_user_role
+		WHERE rid = #{roleId}		
+	</delete>
 </mapper>

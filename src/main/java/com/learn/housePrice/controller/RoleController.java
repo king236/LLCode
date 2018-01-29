@@ -98,4 +98,26 @@ public class RoleController {
 		return Result.success("操作成功");
 	}
 	
+	@RequestMapping(value = "/grant/{id}", method = RequestMethod.GET)
+	public String grant(@PathVariable Long id, Model model){
+		try{
+			model.addAttribute("role", roleMapper.getOne(id));			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "/admin/role/grant";
+	}
+	
+	@RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Result grant(@PathVariable Long id, Long [] roleIds){
+		try {
+			//userRoleMapper.grantUserRoles(id, roleIds);
+			return Result.success("关联角色成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return Result.failure("关联角色失败");
+		}
+	}
 }

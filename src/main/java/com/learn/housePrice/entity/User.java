@@ -5,6 +5,8 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import java.util.Date;
+import java.util.List;
+
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -52,7 +54,7 @@ public class User{
      */
 	private String status;
 
-
+	private List<Role> userRoles;
 
 	public Long getId() {
 		return id;
@@ -110,16 +112,18 @@ public class User{
 		this.status = status;
 	}
 
+	public List<Role> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<Role> userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	@Override
 	public String toString() {
-		return "User{" +
-			", id=" + id +
-			", nickname=" + nickname +
-			", email=" + email +
-			", pswd=" + pswd +
-			", createTime=" + createTime +
-			", lastLoginTime=" + lastLoginTime +
-			", status=" + status +
-			"}";
+		return "User [id=" + id + ", nickname=" + nickname + ", email=" + email + ", pswd=" + pswd + ", createTime="
+				+ createTime + ", lastLoginTime=" + lastLoginTime + ", status=" + status + ", userRoles=" + userRoles
+				+ "]";
 	}
 }

@@ -9,4 +9,6 @@ public interface RoleDao extends BaseDao<Role>{
 
 	public List<Role> selectByMap(Map<String, Object> map);
 	
+	public List<Role> findRolesByUserId(Long userId);
+
 }
