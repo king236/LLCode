@@ -1,5 +1,8 @@
 package com.learn.housePrice.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,9 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.learn.housePrice.dao.PermissionDao;
 import com.learn.housePrice.dao.RoleDao;
+import com.learn.housePrice.dao.RolePermissionDao;
+import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.util.Result;
+import com.learn.housePrice.util.ZtreeView;
+
 
 @Controller
 @RequestMapping("/admin/role")
@@ -26,6 +34,10 @@ public class RoleController {
 
 	@Autowired
 	private RoleDao roleMapper;
+	@Autowired
+	private PermissionDao permissionMapper;
+	@Autowired
+	private RolePermissionDao rolePermissionMapper;
 	
 	@RequestMapping("/index")
 	public String index(){
@@ -110,9 +122,9 @@ public class RoleController {
 	
 	@RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Result grant(@PathVariable Long id, Long [] roleIds){
+	public Result grant(@PathVariable Long id, Long [] permissionIds){
 		try {
-			//userRoleMapper.grantUserRoles(id, roleIds);
+			rolePermissionMapper.grantRolePermissions(id, permissionIds);
 			return Result.success("关联角色成功");
 		} catch (Exception e) {
 			// TODO: handle exception

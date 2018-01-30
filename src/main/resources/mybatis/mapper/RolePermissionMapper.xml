@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.housePrice.dao.RolePermissionDao">
+    <insert id="grantRolePermissions" useGeneratedKeys="true" keyProperty="id">
+  		insert into u_role_permission (rid, pid) values
+  		<foreach item="item" collection="permissionIds" separator=",">
+    		(#{roleId}, #{item})
+  		</foreach>
+	</insert>
+	
+	<delete id="deletePermissionByPermissionId" parameterType="Long"> 
+		DELETE	FROM
+			u_role_permission
+		WHERE uid = #{permissionId}		
+	</delete>
+	
+	<delete id="deletePermissionByRoleId" parameterType="Long"> 
+		DELETE	FROM
+			u_role_permission
+		WHERE rid = #{roleId}		
+	</delete>
+</mapper>

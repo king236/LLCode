@@ -16,4 +16,5 @@ public interface PermissionDao extends BaseDao<Permission>{
 	
 	List<Permission> getPermissionParent();
 	
+	public List<Long> findPermissionsByRoleId(Long roleId);
 }

@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learn.housePrice.dao.MenuDao;
 import com.learn.housePrice.dao.PermissionDao;
+import com.learn.housePrice.dao.RolePermissionDao;
 import com.learn.housePrice.entity.Menu;
 import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.util.Result;
+import com.learn.housePrice.util.ZtreeView;
 
 @Controller
 @RequestMapping(value="/admin/permission")
@@ -30,6 +32,8 @@ public class PermissionController {
 	private PermissionDao permissionDao;
 	@Autowired
 	private MenuDao menuDao;
+	@Autowired
+	private RolePermissionDao rolePermissionDao;
 	
 	@RequestMapping(value="/index")
 	public String index(){		
@@ -167,4 +171,34 @@ public class PermissionController {
 		}
 	 	return menuAllList;
 	}
+	
+	@RequestMapping("/tree/{roleId}")
+	@ResponseBody
+	public List<ZtreeView> tree(@PathVariable Long roleId){
+		List<ZtreeView> list = new ArrayList<>();
+		List<Long> rolePermissionList = permissionDao.findPermissionsByRoleId(roleId);
+		List<Permission> permissionList = permissionDao.getAll();
+		if(!permissionList.isEmpty()){
+			for(Permission permission : permissionList){
+				ZtreeView node = new ZtreeView();
+				node.setId(permission.getId());
+				if(permission.getParentId() != null){
+					node.setpId(permission.getParentId());
+				}
+				node.setName(permission.getPermissionName());
+				if(rolePermissionList.contains(permission.getId())){
+					node.setChecked(true);
+				}
+				if(permission.getPermissionType().compareTo("2") == 0){
+					node.setOpen(false);
+				}else{
+					node.setOpen(true);
+				}
+				
+				list.add(node);
+			}
+		}
+		return list;
+	}
+	
 }

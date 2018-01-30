@@ -139,4 +139,13 @@
        ORDER BY permission_type,parent_id,sort
     </select>
 
+	<select id="findPermissionsByRoleId" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		pid
+    	FROM
+    		u_role_permission
+    	WHERE
+    		rid = #{roleId}
+    </select>
+
 </mapper>
