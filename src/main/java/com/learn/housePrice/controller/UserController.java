@@ -92,10 +92,10 @@ public class UserController {
 	@ResponseBody
 	public Result deleteUser(@PathVariable("id") Long id){
 		try {
-			userMapper.delete(id);
-			userRoleMapper.deleteRoleByUserId(id);
+			userService.delete(id);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return Result.failure(e.getMessage());
 		}
 		return Result.success("操作成功");
@@ -105,15 +105,10 @@ public class UserController {
 	@ResponseBody
 	public Result edit(User user){
 		try {
-			if(user.getId() != null){
-				userMapper.update(user);
-			}else{
-				user.setCreateTime(new Date());
-				user.setStatus("0");
-				userMapper.insert(user);
-			}
+			userService.saveOrUpdate(user);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return Result.failure(e.getMessage());
 		}
 		return Result.success("操作成功");
@@ -135,7 +130,7 @@ public class UserController {
 	@ResponseBody
 	public Result grant(@PathVariable Long id, Long [] roleIds){
 		try {
-			userRoleMapper.grantUserRoles(id, roleIds);
+			userService.grantUserRoles(id, roleIds);
 			return Result.success("关联角色成功");
 		} catch (Exception e) {
 			// TODO: handle exception

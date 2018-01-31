@@ -3,9 +3,12 @@ package com.learn.housePrice.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
 
+@Repository
 public interface UserDao {
 
 	List<User> getAll();
