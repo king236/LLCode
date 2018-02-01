@@ -53,6 +53,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableConfigurationProperties(MybatisProperties.class)
+@MapperScan("com.learn.housePrice.dao")
 public class MybatisPlusConfig {
 
     @Autowired

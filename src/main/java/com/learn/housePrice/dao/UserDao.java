@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
 
-@Repository
 public interface UserDao {
 
 	List<User> getAll();
