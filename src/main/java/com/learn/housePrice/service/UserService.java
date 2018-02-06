@@ -4,11 +4,9 @@ import org.springframework.stereotype.Component;
 
 import com.learn.housePrice.entity.User;
 
-public interface UserService {
+public interface UserService{
 	
 	public void saveOrUpdate(User user);
-	
-	public void delete(Long userId);
 	
 	public void grantUserRoles(Long id, Long [] roleIds);
 }
