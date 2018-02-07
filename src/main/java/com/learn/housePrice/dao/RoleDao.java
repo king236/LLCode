@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.learn.housePrice.entity.Role;
 
-public interface RoleDao extends BaseDao<Role>{
+public interface RoleDao extends BaseDao<Role, Long>{
 
 	public List<Role> selectByMap(Map<String, Object> map);
 	

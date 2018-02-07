@@ -27,56 +27,56 @@ import com.learn.housePrice.util.ZtreeView;
 @Controller
 @RequestMapping(value="/admin/permission")
 public class PermissionController {
-	
+/*
 	@Autowired
 	private PermissionDao permissionDao;
 	@Autowired
 	private MenuDao menuDao;
 	@Autowired
 	private RolePermissionDao rolePermissionDao;
-	
-	@RequestMapping(value="/index")
-	public String index(){		
+
+	@RequestMapping(value = "/index")
+	public String index() {
 		return "/admin/permission/index";
 	}
-	
-	@RequestMapping(value="/leftPermissionData", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/leftPermissionData", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Map<String, Object>> leftPermissionData(){
+	public List<Map<String, Object>> leftPermissionData() {
 		List<Map<String, Object>> permissionAll = new ArrayList<>();
 		List<Permission> permissionParentList = permissionDao.getPermissionParent();
-		
-		if(permissionParentList != null && permissionParentList.size() > 0){
-			for(Permission permission : permissionParentList){
+
+		if (permissionParentList != null && permissionParentList.size() > 0) {
+			for (Permission permission : permissionParentList) {
 				Map<String, Object> map = new HashMap<>();
 				map.put("permissionName", permission.getPermissionName());
-				
-				Map<String,Object> params = new HashMap<>();
+
+				Map<String, Object> params = new HashMap<>();
 				params.put("parentId", permission.getId());
 				List<Permission> permissionChildList = permissionDao.getPermissionChild(params);
-				if(permissionChildList != null && permissionChildList.size() > 0){
-					map.put("children", permissionChildList);				
+				if (permissionChildList != null && permissionChildList.size() > 0) {
+					map.put("children", permissionChildList);
 				}
-				
+
 				permissionAll.add(map);
 			}
 		}
-	 	return permissionAll;
+		return permissionAll;
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public Result addPermission(Permission permission){
+	public Result addPermission(Permission permission) {
 		try {
-			//if(StringUtils.isBlank(permission.getParentId())){
-			//	permission.setParentId(null);
-			//}
+			// if(StringUtils.isBlank(permission.getParentId())){
+			// permission.setParentId(null);
+			// }
 			Long maxSort = permissionDao.getSortMax(permission);
-			permission.setSort((Long)(maxSort+1));
+			permission.setSort((Long) (maxSort + 1));
 			Long id = permissionDao.insert(permission);
-			if(id == 1L){
+			if (id == 1L) {
 				return Result.success("权限插入成功");
-			}else{
+			} else {
 				return Result.failure("权限插入失败");
 			}
 		} catch (Exception e) {
@@ -84,20 +84,20 @@ public class PermissionController {
 			return Result.failure(e.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
 	public String add(@PathVariable Long id, Model model) {
-		if(id > 0){
+		if (id > 0) {
 			model.addAttribute("permission", permissionDao.getOne(id));
 		}
 		return "admin/permission/form";
 	}
-	
+
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable Long id, Model model) {
 		try {
 			Permission permission = permissionDao.getOne(id);
-			if( permission.getParentId() != 0 ){
+			if (permission.getParentId() != 0) {
 				model.addAttribute("permissionParent", permissionDao.getOne(permission.getParentId()));
 			}
 			model.addAttribute("permission", permissionDao.getOne(id));
@@ -106,10 +106,10 @@ public class PermissionController {
 		}
 		return "admin/permission/edit";
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public Result edit(Permission permission){
+	public Result edit(Permission permission) {
 		try {
 			permissionDao.update(permission);
 			return Result.success("修改成功");
@@ -118,10 +118,10 @@ public class PermissionController {
 			return Result.failure(e.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Result delete(@PathVariable Long id){
+	public Result delete(@PathVariable Long id) {
 		try {
 			permissionDao.delete(id);
 			return Result.success("删除成功");
@@ -130,75 +130,74 @@ public class PermissionController {
 			return Result.failure(e.getMessage());
 		}
 	}
-	
-	@RequestMapping(value="/getPermission", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/getPermission", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Permission> getPermission(){
+	public List<Permission> getPermission() {
+
 		
-		/*List<Permission> permissionParentList = permissionDao.getPermissionParent();
-		List<Permission> permissionAllList = new ArrayList<Permission>();
-		if(permissionParentList != null && permissionParentList.size() > 0){
-			for(Permission permission : permissionParentList){
-				permissionAllList.add(permission);
-				Map<String,Object> params = new HashMap<>();
-				params.put("parentId", permission.getId());
-				List<Permission> permissionChildList = permissionDao.getPermissionChild(params);
-				if(permissionChildList != null && permissionChildList.size() > 0){
-					permissionAllList.addAll(permissionChildList);					
-				}
-			}
-		}*/
-	 	return permissionDao.getAll();
+		 * List<Permission> permissionParentList =
+		 * permissionDao.getPermissionParent(); List<Permission>
+		 * permissionAllList = new ArrayList<Permission>();
+		 * if(permissionParentList != null && permissionParentList.size() > 0){
+		 * for(Permission permission : permissionParentList){
+		 * permissionAllList.add(permission); Map<String,Object> params = new
+		 * HashMap<>(); params.put("parentId", permission.getId());
+		 * List<Permission> permissionChildList =
+		 * permissionDao.getPermissionChild(params); if(permissionChildList !=
+		 * null && permissionChildList.size() > 0){
+		 * permissionAllList.addAll(permissionChildList); } } }
+		 
+		return permissionDao.getAll();
 	}
-	
-	
-	@RequestMapping(value="getMenu", method=RequestMethod.GET)
+
+	@RequestMapping(value = "getMenu", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Menu> getMenu(){
-		
+	public List<Menu> getMenu() {
+
 		List<Menu> menuParentList = menuDao.getMenuParent();
 		List<Menu> menuAllList = new ArrayList<Menu>();
-		if(menuParentList != null && menuParentList.size() > 0){
-			for(Menu menu : menuParentList){
+		if (menuParentList != null && menuParentList.size() > 0) {
+			for (Menu menu : menuParentList) {
 				menuAllList.add(menu);
-				Map<String,Object> params = new HashMap<>();
+				Map<String, Object> params = new HashMap<>();
 				params.put("parentMenuId", menu.getId());
 				List<Menu> menuChildList = menuDao.getMenuChild(params);
-				if(menuChildList != null && menuChildList.size() > 0){
-					menuAllList.addAll(menuChildList);					
+				if (menuChildList != null && menuChildList.size() > 0) {
+					menuAllList.addAll(menuChildList);
 				}
 			}
 		}
-	 	return menuAllList;
+		return menuAllList;
 	}
-	
+
 	@RequestMapping("/tree/{roleId}")
 	@ResponseBody
-	public List<ZtreeView> tree(@PathVariable Long roleId){
+	public List<ZtreeView> tree(@PathVariable Long roleId) {
 		List<ZtreeView> list = new ArrayList<>();
 		List<Long> rolePermissionList = permissionDao.findPermissionsByRoleId(roleId);
 		List<Permission> permissionList = permissionDao.getAll();
-		if(!permissionList.isEmpty()){
-			for(Permission permission : permissionList){
+		if (!permissionList.isEmpty()) {
+			for (Permission permission : permissionList) {
 				ZtreeView node = new ZtreeView();
 				node.setId(permission.getId());
-				if(permission.getParentId() != null){
+				if (permission.getParentId() != null) {
 					node.setpId(permission.getParentId());
 				}
 				node.setName(permission.getPermissionName());
-				if(rolePermissionList.contains(permission.getId())){
+				if (rolePermissionList.contains(permission.getId())) {
 					node.setChecked(true);
 				}
-				if(permission.getPermissionType().compareTo("2") == 0){
+				if (permission.getPermissionType().compareTo("2") == 0) {
 					node.setOpen(false);
-				}else{
+				} else {
 					node.setOpen(true);
 				}
-				
+
 				list.add(node);
 			}
 		}
 		return list;
-	}
+	}*/
 	
 }

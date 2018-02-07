@@ -1,13 +1,14 @@
 package com.learn.housePrice.dao;
 
-import java.io.Serializable;
 import java.util.List;
+
+import com.learn.housePrice.entity.BaseEntity;
 
 /*
  * 基本的数据操作类
  * 实现增删改查功能
  */
-public abstract interface BaseDao<T extends Serializable> {
+public abstract interface BaseDao<T extends BaseEntity<ID>, ID> {
 	/*
 	 * 查找
 	 */
@@ -17,13 +18,13 @@ public abstract interface BaseDao<T extends Serializable> {
 	 * @param id
 	 * @return T
 	 */
-	T findById(Long id);
+	T findById(ID id);
 	/*
 	 * 保存
 	 * @param model
 	 * @return T
 	 */
-	Long insert(T model);
+	ID insert(T model);
 	/*
 	 * 修改
 	 * @param model
@@ -33,6 +34,6 @@ public abstract interface BaseDao<T extends Serializable> {
 	 * 删除
 	 * @param id
 	 */
-	void delete(Long id);
+	void delete(ID id);
 	
 }

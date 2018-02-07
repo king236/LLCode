@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.entiy.LearnResouce;
+import com.learn.housePrice.service.UserService;
 import com.learn.housePrice.util.Result;
 
 @Controller
@@ -28,7 +29,7 @@ import com.learn.housePrice.util.Result;
 public class HelloWorldController {
 
 	@Autowired
-	UserDao userDao;
+	UserService userService;
 	
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(){
@@ -50,7 +51,7 @@ public class HelloWorldController {
     public String doLogin(Model model, User user, HttpSession session){
     	//model.addAttribute("userInfo", userDao.getUser(user));
     	//Result result = new Result();
-    	User userCheck = userDao.getUser(user);
+    	User userCheck = userService.checkUserLogin(user);
     	if (userCheck != null) {
 			session.setAttribute("userInfo", userCheck);
 			return "redirect:/admin/index";

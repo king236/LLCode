@@ -6,7 +6,7 @@ import java.util.Map;
 import com.learn.housePrice.entity.Menu;
 import com.learn.housePrice.entity.Permission;
 
-public interface PermissionDao extends BaseDao<Permission>{
+public interface PermissionDao extends BaseDao<Permission, Long>{
 
 	public List<Permission> selectByMap(Map<String, Object> map);
 	

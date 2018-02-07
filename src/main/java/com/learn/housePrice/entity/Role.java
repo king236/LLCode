@@ -19,12 +19,10 @@ import java.io.Serializable;
  * @since 2017-11-13
  */
 @TableName("u_role")
-public class Role {
+public class Role extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value="id", type= IdType.AUTO)
-	private Long id;
     /**
      * 角色名称
      */
@@ -36,15 +34,6 @@ public class Role {
 	private String roleKey;
 	
 	private String status;
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

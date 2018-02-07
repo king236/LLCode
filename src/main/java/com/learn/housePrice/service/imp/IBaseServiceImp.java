@@ -1,47 +1,49 @@
 package com.learn.housePrice.service.imp;
 
-import java.io.Serializable;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.learn.housePrice.dao.BaseDao;
-import com.learn.housePrice.entity.User;
+import com.learn.housePrice.entity.BaseEntity;
 import com.learn.housePrice.service.IBaseService;
 
-public class IBaseServiceImp implements IBaseService<Serializable> {
+@SuppressWarnings("unchecked")
+@Transactional
+public abstract  class IBaseServiceImp<T extends BaseEntity<M>, M> implements IBaseService<T, M>{
 
-	@Autowired
-	BaseDao<Serializable> dao;
+    public abstract  BaseDao<T,M> getDao();
 	
 	@Override
-	public List<Serializable> find() {
+	public List<T> find() {
 		// TODO Auto-generated method stub
-		return dao.find();
+		return (List<T>) getDao().find();
 	}
 
 	@Override
-	public Serializable findById(Long id) {
+	public T findById(M id) {
 		// TODO Auto-generated method stub
-		return dao.findById(id);
+		return (T) getDao().findById(id);
 	}
 
 	@Override
-	public Long insert(Serializable model) {
+	public M insert(T model) {
 		// TODO Auto-generated method stub
-		return dao.insert(model);
+		return getDao().insert(model);
 	}
 
 	@Override
-	public void update(Serializable model) {
+	public void update(T model) {
 		// TODO Auto-generated method stub
-		dao.update(model);
+		getDao().update(model);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(M id) {
 		// TODO Auto-generated method stub
-		dao.delete(id);
+		getDao().delete(id);
 	}
 
+    
 }

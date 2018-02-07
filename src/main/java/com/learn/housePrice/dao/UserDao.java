@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
 
-public interface UserDao extends BaseDao<User>{
+
+public interface UserDao extends BaseDao<User, Long>{
 
 	List<User> selectByMap(Map<String, Object> params);
 	

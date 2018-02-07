@@ -31,10 +31,7 @@ import com.learn.housePrice.util.Result;
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
-	
-	@Autowired
-	private UserDao userMapper;
-	
+/*	
 	@Autowired
 	private RoleDao roleMapper;
 	
@@ -71,14 +68,14 @@ public class UserController {
     		e.printStackTrace();
     	}
     	PageHelper.startPage(page, size);
-    	List<User> userList = userMapper.getAll();
+    	List<User> userList = userService.find();
     	PageInfo<User> userPage = new PageInfo<>(userList);
 		return userPage;
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUserInfo(@PathVariable("id") Long id, Model model){
-		User user = userMapper.getOne(id);
+		User user = userService.findById(id);
 		model.addAttribute("user", user);
 		return "admin/user/form";
 	}
@@ -117,9 +114,9 @@ public class UserController {
 	@RequestMapping(value = "/grant/{id}", method = RequestMethod.GET)
 	public String grant(@PathVariable Long id, Model model){
 		try{
-			model.addAttribute("user", userMapper.getOne(id));
-			model.addAttribute("roles", roleMapper.getAll());
-			model.addAttribute("roleIds", userMapper.getRoles(id));
+			model.addAttribute("user", userService.findById(id));
+			model.addAttribute("roles", roleMapper.find());
+			model.addAttribute("roleIds", userService.getRoles(id));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -137,5 +134,5 @@ public class UserController {
 			e.printStackTrace();
 			return Result.failure("关联角色失败");
 		}
-	}
+	}*/
 }

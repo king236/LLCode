@@ -31,7 +31,7 @@ import com.learn.housePrice.util.ZtreeView;
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController {
-
+/*
 	@Autowired
 	private RoleDao roleMapper;
 	@Autowired
@@ -131,5 +131,5 @@ public class RoleController {
 			e.printStackTrace();
 			return Result.failure("关联角色失败");
 		}
-	}
+	}*/
 }

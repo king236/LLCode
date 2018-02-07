@@ -16,11 +16,10 @@ import java.io.Serializable;
  * @since 2017-11-13
  */
 @TableName("u_permission")
-public class Permission {
+public class Permission extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
 
-	private Long id;
 	@TableField("permission_name")
 	private String permissionName;
 	@TableField("permission_url")
@@ -32,14 +31,6 @@ public class Permission {
 	@TableField("permission_type")
 	private String permissionType;
 	private Long sort;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getPermissionName() {
 		return permissionName;

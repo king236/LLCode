@@ -20,20 +20,24 @@ import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMappingTest {
 
-	@Autowired
+/*	@Autowired
 	private UserDao userDao;
 	@Autowired
 	private RoleDao roleDao;
 	@Autowired
-	private PermissionDao permissionDao;
+	private PermissionDao permissionDao;*/
+	
+	@Autowired
+	private UserService userService;
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());  
-	@Test
+/*	@Test
 	public void testRoleInsert() throws Exception {
 		Role role = new Role();
 		role.setName("test");
@@ -43,7 +47,7 @@ public class UserMappingTest {
 		roleDao.insert(role);
 		
 		log.debug("insert success id=" + role.getId());
-	}
+	}*/
 	/*@Test
 	public void testInsert() throws Exception {
 		
@@ -60,9 +64,9 @@ public class UserMappingTest {
 
 	}*/
 
-/*	@Test
+	@Test
 	public void testQuery() throws Exception {
-		List<User> users = userDao.getAll();
+		List<User> users = userService.find();
 		if(users==null || users.size()==0){
 			System.out.println("is null");
 		}else{
@@ -71,7 +75,7 @@ public class UserMappingTest {
 	}
 	
 	
-	@Test
+	/*	@Test
 	public void testUpdate() throws Exception {
 		User user = userDao.getOne(2L);
 		System.out.println(user.toString());

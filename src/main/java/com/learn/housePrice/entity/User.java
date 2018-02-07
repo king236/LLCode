@@ -20,13 +20,12 @@ import java.io.Serializable;
  * @author lilin
  * @since 2017-11-04
  */
+
 @TableName("u_user")
-public class User implements Serializable{
+public class User extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
 
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
     /**
      * 用户昵称
      */
@@ -55,14 +54,6 @@ public class User implements Serializable{
 	private String status;
 
 	private List<Role> userRoles;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNickname() {
 		return nickname;
