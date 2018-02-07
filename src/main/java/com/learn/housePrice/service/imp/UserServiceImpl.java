@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.learn.housePrice.dao.BaseDao;
 import com.learn.housePrice.dao.UserDao;
@@ -27,23 +24,23 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 	
 	@Autowired  
     @Qualifier("userDao")  
-    private UserDao dao;  
+    private UserDao userDao;  
 	
 	@Override
 	public void saveOrUpdate(User user) {
 		// TODO Auto-generated method stub
 		if(user.getId() != null){
-			dao.update(user);
+			userDao.update(user);
 		}else{
 			user.setCreateTime(new Date());
 			user.setStatus("0");
-			dao.insert(user);
+			userDao.insert(user);
 		}
 	}
 	
 	@Override
 	public void delete(Long userId){
-		dao.delete(userId);
+		userDao.delete(userId);
 		userRoleMapper.deleteRoleByUserId(userId);
 	}
 	
@@ -57,7 +54,7 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 		Map<String, Object> params = new HashMap<>();
 		params.put("nickname", user.getNickname());
 		params.put("pswd", user.getPswd());
-		List<User> userList = dao.selectByMap(params);
+		List<User> userList = userDao.checkUserLogin(params);
 		if(userList != null && userList.size() == 1){
 			return userList.get(0);
 		}
@@ -67,7 +64,7 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 	@Override
 	public BaseDao<User, Long> getDao() {
 		// TODO Auto-generated method stub
-		return dao;
+		return userDao;
 	}
 
 }

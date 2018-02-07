@@ -25,18 +25,19 @@ import com.learn.housePrice.dao.RoleDao;
 import com.learn.housePrice.dao.UserDao;
 import com.learn.housePrice.dao.UserRoleDao;
 import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.UserRoleService;
 import com.learn.housePrice.service.UserService;
 import com.learn.housePrice.util.Result;
 
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
-/*	
+	
 	@Autowired
 	private RoleDao roleMapper;
 	
 	@Autowired
-	private UserRoleDao userRoleMapper;
+	private UserRoleService userRoleService;
 	
 	@Autowired
 	private UserService userService;
@@ -116,7 +117,7 @@ public class UserController {
 		try{
 			model.addAttribute("user", userService.findById(id));
 			model.addAttribute("roles", roleMapper.find());
-			model.addAttribute("roleIds", userService.getRoles(id));
+			model.addAttribute("roleIds", userRoleService.getRolesIdsByUserId(id));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -134,5 +135,5 @@ public class UserController {
 			e.printStackTrace();
 			return Result.failure("关联角色失败");
 		}
-	}*/
+	}
 }

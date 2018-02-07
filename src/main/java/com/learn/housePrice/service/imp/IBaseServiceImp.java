@@ -9,7 +9,6 @@ import com.learn.housePrice.dao.BaseDao;
 import com.learn.housePrice.entity.BaseEntity;
 import com.learn.housePrice.service.IBaseService;
 
-@SuppressWarnings("unchecked")
 @Transactional
 public abstract  class IBaseServiceImp<T extends BaseEntity<M>, M> implements IBaseService<T, M>{
 

@@ -17,7 +17,7 @@
 		id, permission_name, permission_url, permission_key, parent_id, permission_type, sort
 	</sql>
 
-	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
+	<select id="findByMapParams" parameterType="HashMap" resultMap="BaseResultMap">
 		SELECT 
 			<include refid="Base_Column_List"></include>
 		FROM
@@ -43,8 +43,8 @@
     		<if test="parentId != null">parent_id = #{parentId}</if> 
     		<if test="parentId == null">parent_id is null</if>    		
     </select>
-    
-    <select id="getPermissionChild" resultMap="BaseResultMap" parameterType="java.util.Map" >
+<!--    
+     <select id="getPermissionChild" resultMap="BaseResultMap" parameterType="java.util.Map" >
     	SELECT * 
     	FROM 
     		u_permission
@@ -60,7 +60,7 @@
     	WHERE
     		parent_id is null 
     	ORDER BY sort    	
-    </select>
+    </select> -->
 
 	<insert id="insert" parameterType="Permission" 
     	useGeneratedKeys="true" keyProperty="id">
@@ -125,27 +125,18 @@
              id =#{id}
     </delete>
     
-    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
+    <select id="findById" parameterType="Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
        FROM u_permission
        WHERE id = #{id}
     </select>
     
-    <select id="getAll" resultMap="BaseResultMap"  >
+    <select id="find" resultMap="BaseResultMap"  >
        SELECT 
        <include refid="Base_Column_List" />
        FROM u_permission
        ORDER BY permission_type,parent_id,sort
-    </select>
-
-	<select id="findPermissionsByRoleId" parameterType="Long" resultType="Long">	
-    	SELECT 	
-    		pid
-    	FROM
-    		u_role_permission
-    	WHERE
-    		rid = #{roleId}
     </select>
 
 </mapper>

@@ -1,17 +1,17 @@
-package com.learn.housePrice.dao;
+package com.learn.housePrice.service;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface UserRoleDao{
+public interface UserRoleService {
 
 	/*
 	 * 用户授权
 	 * @params userId,roleIds
 	 * @return
 	 */
-	public void grantUserRoles(@Param("userId") Long userId, @Param("roleIds") Long [] roleIds);
+	public void grantUserRoles(Long userId, Long [] roleIds);
 	/*
 	 * 删除角色
 	 * @params userId
@@ -31,4 +31,5 @@ public interface UserRoleDao{
 	 * @return List<Long>
 	 */
 	public List<Long> getRolesIdsByUserId(Long userId);
+	
 }

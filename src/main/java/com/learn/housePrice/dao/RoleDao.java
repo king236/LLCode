@@ -6,9 +6,11 @@ import java.util.Map;
 import com.learn.housePrice.entity.Role;
 
 public interface RoleDao extends BaseDao<Role, Long>{
-
-	public List<Role> selectByMap(Map<String, Object> map);
-	
+	/*
+	 * 获取用户角色
+	 * @params userId
+	 * @return List<Role>
+	 */
 	public List<Role> findRolesByUserId(Long userId);
 
 }

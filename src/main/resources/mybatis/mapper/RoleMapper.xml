@@ -14,7 +14,7 @@
         id, name, role_key, status
     </sql>
 
-	<select id="selectByMap" parameterType="HashMap" resultMap="BaseResultMap">
+	<select id="findByMapParams" parameterType="HashMap" resultMap="BaseResultMap">
 		SELECT 
 			t1.id, t1.name, t1.role_key, t1.status
 		FROM
@@ -81,20 +81,14 @@
              id =#{id}
     </delete>
     
-    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
+    <select id="findById" parameterType="Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
        FROM u_role
        WHERE id = #{id}
     </select>
     
-    <select id="getAll" resultMap="BaseResultMap"  >
-       SELECT 
-       <include refid="Base_Column_List" />
-       FROM u_role
-    </select>
-
-	<select id="getAll" resultMap="BaseResultMap"  >
+    <select id="find" resultMap="BaseResultMap"  >
        SELECT 
        <include refid="Base_Column_List" />
        FROM u_role

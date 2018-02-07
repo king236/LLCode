@@ -21,4 +21,13 @@
 			u_role_permission
 		WHERE rid = #{roleId}		
 	</delete>
+	
+	<select id="findPermissionsByRoleId" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		pid
+    	FROM
+    		u_role_permission
+    	WHERE
+    		rid = #{roleId}
+    </select>
 </mapper>

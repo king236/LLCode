@@ -25,7 +25,7 @@
        FROM u_user
     </select>
 
-	<select id="selectByMap" parameterType="java.util.Map"  resultMap="BaseResultMap" >
+	<select id="checkUserLogin" parameterType="java.util.Map"  resultMap="BaseResultMap" >
 		SELECT
 		<include refid="Base_Column_List" />
        	FROM u_user
@@ -33,15 +33,13 @@
        	AND pswd = #{pswd}
 	</select>
 
-	<select id="getUser" parameterType="com.learn.housePrice.entity.User" resultMap="BaseResultMap">
+	<select id="findByMapParams" parameterType="java.util.Map"  resultMap="BaseResultMap" >
 		SELECT
 		<include refid="Base_Column_List" />
        	FROM u_user
-       	WHERE nickname = #{nickname}
-       	AND pswd = #{pswd}
 	</select>
 
-    <select id="getOne" parameterType="Long" resultMap="BaseResultMap" >
+    <select id="findById" parameterType="Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
        FROM u_user
@@ -107,27 +105,5 @@
              u_user 
        WHERE 
              id =#{id}
-    </delete>
-    
-    <select id="getRoles" parameterType="Long" resultType="Long">	
-    	SELECT 	
-    		rid
-    	FROM
-    		u_user_role
-    	WHERE
-    		uid = #{userId}
-    </select>
-    
-    <select id="getRolesName" parameterType="Long" resultType="String">
-    	SELECT
-    	 	t1.name 
-    	FROM 
-    		u_role t1 
-    	LEFT JOIN 
-    		u_user_role t2 
-    	ON 
-    		t1.id = t2.rid
-    	WHERE 
-    		t2.uid = #{userId}
-    </select>
+    </delete>   
 </mapper>

@@ -21,4 +21,13 @@
 			u_user_role
 		WHERE rid = #{roleId}		
 	</delete>
+	
+	<select id="getRolesIdsByUserId" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		rid
+    	FROM
+    		u_user_role
+    	WHERE
+    		uid = #{userId}
+    </select>
 </mapper>

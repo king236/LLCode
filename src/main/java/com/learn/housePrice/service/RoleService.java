@@ -1,8 +1,16 @@
 package com.learn.housePrice.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
-public class RoleService {
+import com.learn.housePrice.entity.Role;
 
+public interface RoleService extends IBaseService<Role, Long>{
+	
+	/*
+	 * 获取用户角色
+	 * @params userId
+	 * @return List<Role>
+	 */
+	public List<Role> findRolesByUserId(Long userId);
+	
 }
