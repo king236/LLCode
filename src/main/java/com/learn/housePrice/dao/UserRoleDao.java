@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserRoleDao{
 
 	/*
-	 * 用户授权
+	 * 用户关联角色
 	 * @params userId,roleIds
 	 * @return
 	 */

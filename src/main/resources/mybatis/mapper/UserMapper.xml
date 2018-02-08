@@ -106,4 +106,26 @@
        WHERE 
              id =#{id}
     </delete>   
+    
+   	<insert id="grantUserRoles" useGeneratedKeys="true" keyProperty="id">
+  		insert into u_user_role (uid, rid) values
+  		<foreach item="item" collection="roleIds" separator=",">
+    		(#{userId}, #{item})
+  		</foreach>
+	</insert>
+	
+	<delete id="deleteRoleByUserId" parameterType="Long"> 
+		DELETE	FROM
+			u_user_role
+		WHERE uid = #{userId}		
+	</delete>
+	
+	<select id="getRolesIdsByUserId" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		rid
+    	FROM
+    		u_user_role
+    	WHERE
+    		uid = #{userId}
+    </select>
 </mapper>

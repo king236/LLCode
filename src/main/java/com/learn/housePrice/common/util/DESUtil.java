@@ -1,4 +1,4 @@
-package com.learn.housePrice.util;
+package com.learn.housePrice.common.util;
 
 import java.security.SecureRandom;
 

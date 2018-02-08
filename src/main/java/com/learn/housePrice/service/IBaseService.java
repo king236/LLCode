@@ -1,6 +1,7 @@
 package com.learn.housePrice.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learn.housePrice.entity.BaseEntity;
 
@@ -36,4 +37,11 @@ public abstract interface IBaseService<T , ID> { // extends BaseEntity<ID>
 	 * @param id
 	 */
 	void delete(ID id);
+	
+	/*
+	 * 通过参数列表查找
+	 * @params map
+	 * @return List<Role>
+	 */
+	public List<T> findByMapParams(Map<String, Object> map);
 }

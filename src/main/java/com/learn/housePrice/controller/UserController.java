@@ -16,28 +16,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.learn.housePrice.dao.RoleDao;
-import com.learn.housePrice.dao.UserDao;
-import com.learn.housePrice.dao.UserRoleDao;
 import com.learn.housePrice.entity.User;
-import com.learn.housePrice.service.UserRoleService;
+import com.learn.housePrice.service.RoleService;
 import com.learn.housePrice.service.UserService;
-import com.learn.housePrice.util.Result;
+import com.learn.housePrice.common.util.Result;
 
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
 	
 	@Autowired
-	private RoleDao roleMapper;
-	
-	@Autowired
-	private UserRoleService userRoleService;
+	private RoleService roleService;
 	
 	@Autowired
 	private UserService userService;
@@ -103,7 +95,13 @@ public class UserController {
 	@ResponseBody
 	public Result edit(User user){
 		try {
-			userService.saveOrUpdate(user);
+			if(user.getId() != null){
+				userService.update(user);
+			}else{
+				user.setCreateTime(new Date());
+				user.setStatus("0");
+				userService.insert(user);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -116,8 +114,8 @@ public class UserController {
 	public String grant(@PathVariable Long id, Model model){
 		try{
 			model.addAttribute("user", userService.findById(id));
-			model.addAttribute("roles", roleMapper.find());
-			model.addAttribute("roleIds", userRoleService.getRolesIdsByUserId(id));
+			model.addAttribute("roles", roleService.find());
+			model.addAttribute("roleIds", userService.getRolesIdsByUserId(id));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

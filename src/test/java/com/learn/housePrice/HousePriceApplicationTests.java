@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.learn.housePrice.controller.HelloWorldController;
+import com.learn.housePrice.controller.IndexController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MockServletContext.class)
@@ -24,7 +24,7 @@ public class HousePriceApplicationTests {
     private MockMvc mvc;
     @Before
     public void setUp() throws Exception {
-        mvc = MockMvcBuilders.standaloneSetup(new HelloWorldController()).build();
+        mvc = MockMvcBuilders.standaloneSetup(new IndexController()).build();
     }
     @Test
     public void getHello() throws Exception {

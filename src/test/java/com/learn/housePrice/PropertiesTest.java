@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.learn.housePrice.config.PropertiesConfig;
+import com.learn.housePrice.common.config.PropertiesConfig;
+
 
 
 @RunWith(SpringRunner.class)

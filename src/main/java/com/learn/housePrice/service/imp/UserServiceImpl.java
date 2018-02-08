@@ -27,21 +27,9 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
     private UserDao userDao;  
 	
 	@Override
-	public void saveOrUpdate(User user) {
-		// TODO Auto-generated method stub
-		if(user.getId() != null){
-			userDao.update(user);
-		}else{
-			user.setCreateTime(new Date());
-			user.setStatus("0");
-			userDao.insert(user);
-		}
-	}
-	
-	@Override
 	public void delete(Long userId){
 		userDao.delete(userId);
-		userRoleMapper.deleteRoleByUserId(userId);
+		userDao.deleteRoleByUserId(userId);
 	}
 	
 	@Override
@@ -65,6 +53,19 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 	public BaseDao<User, Long> getDao() {
 		// TODO Auto-generated method stub
 		return userDao;
+	}
+
+	@Override
+	public List<User> findByMapParams(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userDao.findByMapParams(map);
+	}
+
+
+	@Override
+	public List<Long> getRolesIdsByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		return userDao.getRolesIdsByUserId(userId);
 	}
 
 }

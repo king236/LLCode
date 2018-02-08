@@ -10,5 +10,10 @@ public interface PermissionDao extends BaseDao<Permission, Long>{
 	 * @return Long
 	 */
 	public Long getSortMax(Permission permission);
-	
+	/*
+	 * 通过permissionId删除权限关联表相关信息
+	 * @params permissionId
+	 * @return
+	 */
+	public void deleteRolePermissionByPermissionId(Long permissionId);
 }

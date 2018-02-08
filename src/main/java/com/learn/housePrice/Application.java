@@ -1,7 +1,6 @@
 package com.learn.housePrice;
 
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 @SpringBootApplication
-public class HousePriceApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HousePriceApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

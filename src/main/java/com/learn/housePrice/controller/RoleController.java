@@ -1,8 +1,5 @@
 package com.learn.housePrice.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,25 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.learn.housePrice.dao.PermissionDao;
-import com.learn.housePrice.dao.RoleDao;
-import com.learn.housePrice.dao.RolePermissionDao;
-import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.entity.Role;
-import com.learn.housePrice.util.Result;
-import com.learn.housePrice.util.ZtreeView;
+import com.learn.housePrice.service.RoleService;
+import com.learn.housePrice.common.util.Result;
 
 
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController {
-/*
+
 	@Autowired
-	private RoleDao roleMapper;
-	@Autowired
-	private PermissionDao permissionMapper;
-	@Autowired
-	private RolePermissionDao rolePermissionMapper;
+	private RoleService roleService;
 	
 	@RequestMapping("/index")
 	public String index(){
@@ -66,13 +55,13 @@ public class RoleController {
     		e.printStackTrace();
     	}
     	PageHelper.startPage(page, size);
-    	PageInfo<Role> rolePage = new PageInfo<>(roleMapper.getAll());
+    	PageInfo<Role> rolePage = new PageInfo<>(roleService.find());
 		return rolePage;
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getUserInfo(@PathVariable("id") Long id, Model model){
-		Role role = roleMapper.getOne(id);
+		Role role = roleService.findById(id);
 		model.addAttribute("role", role);
 		return "admin/role/form";
 	}
@@ -84,9 +73,9 @@ public class RoleController {
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Result deleteUser(@PathVariable("id") Long id){
+	public Result deleteRole(@PathVariable("id") Long id){
 		try {
-			roleMapper.delete(id);
+			roleService.delete(id);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return Result.failure(e.getMessage());
@@ -99,9 +88,9 @@ public class RoleController {
 	public Result edit(Role role){
 		try {
 			if(role.getId() != null){
-				roleMapper.update(role);
+				roleService.update(role);
 			}else{
-				roleMapper.insert(role);
+				roleService.insert(role);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -113,7 +102,7 @@ public class RoleController {
 	@RequestMapping(value = "/grant/{id}", method = RequestMethod.GET)
 	public String grant(@PathVariable Long id, Model model){
 		try{
-			model.addAttribute("role", roleMapper.getOne(id));			
+			model.addAttribute("role", roleService.findById(id));			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -124,12 +113,12 @@ public class RoleController {
 	@ResponseBody
 	public Result grant(@PathVariable Long id, Long [] permissionIds){
 		try {
-			rolePermissionMapper.grantRolePermissions(id, permissionIds);
+			roleService.grantRolePermissions(id, permissionIds);
 			return Result.success("关联角色成功");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return Result.failure("关联角色失败");
 		}
-	}*/
+	}
 }

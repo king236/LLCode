@@ -139,4 +139,9 @@
        ORDER BY permission_type,parent_id,sort
     </select>
 
+	<delete id="deleteRolePermissionByPermissionId" parameterType="Long"> 
+		DELETE	FROM
+			u_role_permission
+		WHERE uid = #{permissionId}		
+	</delete>
 </mapper>

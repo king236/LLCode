@@ -107,4 +107,33 @@
 			t2.uid = #{userId}
 	</select>
 
+
+	<delete id="deleteRolePermissionByRoleId" parameterType="Long"> 
+		DELETE	FROM
+			u_role_permission
+		WHERE rid = #{roleId}		
+	</delete>
+
+	<insert id="grantRolePermissions" useGeneratedKeys="true" keyProperty="id">
+  		insert into u_role_permission (rid, pid) values
+  		<foreach item="item" collection="permissionIds" separator=",">
+    		(#{roleId}, #{item})
+  		</foreach>
+	</insert>
+	
+	<select id="findPermissionIdsByRoleId" parameterType="Long" resultType="Long">	
+    	SELECT 	
+    		pid
+    	FROM
+    		u_role_permission
+    	WHERE
+    		rid = #{roleId}
+    </select>
+    
+    <delete id="deleteRoleByRoleId" parameterType="Long"> 
+		DELETE	FROM
+			u_user_role
+		WHERE rid = #{roleId}		
+	</delete>
+
 </mapper>
