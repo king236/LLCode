@@ -2,23 +2,6 @@ package com.learn.housePrice.entity;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
-
-import java.io.Serializable;
-
-/**
- * <p>
- * 
- * </p>
- *
- * @author lilin
- * @since 2017-11-13
- */
-@TableName("u_role")
 public class Role extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +13,6 @@ public class Role extends BaseEntity<Long>{
     /**
      * 角色类型
      */
-	@TableField("role_key")
 	private String roleKey;
 	
 	private String status;

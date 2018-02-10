@@ -9,7 +9,9 @@ import com.learn.housePrice.dao.BaseDao;
 import com.learn.housePrice.dao.PermissionDao;
 import com.learn.housePrice.entity.Permission;
 import com.learn.housePrice.service.PermissionService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PermissionServiceImp extends IBaseServiceImp<Permission, Long> implements PermissionService {
 
 	@Autowired

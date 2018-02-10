@@ -1,27 +1,9 @@
 package com.learn.housePrice.entity;
 
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import java.util.Date;
 import java.util.List;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
-
-/**
- * <p>
- * 
- * </p>
- *
- * @author lilin
- * @since 2017-11-04
- */
-
-@TableName("u_user")
 public class User extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
@@ -41,12 +23,10 @@ public class User extends BaseEntity<Long>{
     /**
      * 创建时间
      */
-	@TableField("create_time")
 	private Date createTime;
     /**
      * 最后登录时间
      */
-	@TableField("last_login_time")
 	private Date lastLoginTime;
     /**
      * 1:有效，0:禁止登录

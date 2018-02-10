@@ -1,3 +1,4 @@
+/*
 package com.learn.housePrice.common.config;
 
 import java.util.Properties;
@@ -28,12 +29,14 @@ import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import com.baomidou.mybatisplus.spring.boot.starter.SpringBootVFS;
 import com.github.pagehelper.PageHelper;
 
+*/
 /**
  * @Description : MybatisPlus配置
  * ---------------------------------
  * @Author : Liang.Guangqing
  * @Date : Create in 2017/9/19 13:54
- */
+ *//*
+
 @Configuration
 @EnableConfigurationProperties(MybatisProperties.class)
 @MapperScan("com.learn.housePrice.dao")
@@ -59,11 +62,13 @@ public class MybatisPlusConfig {
         page.setDialectType("mysql");
         return page;
     }
-    /**
+    */
+/**
      * 这里全部使用mybatis-autoconfigure 已经自动加载的资源。不手动指定
      * 配置文件和mybatis-boot的配置文件同步
      * @return
-     */
+     *//*
+
     @Bean
     public MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean() {
         MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
@@ -114,4 +119,4 @@ public class MybatisPlusConfig {
         pageHelper.setProperties(p);
         return pageHelper;
     }
-}
+}*/

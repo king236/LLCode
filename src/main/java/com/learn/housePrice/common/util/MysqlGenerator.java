@@ -12,7 +12,8 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- */
+ *//*
+
 package com.learn.housePrice.common.util;
 
 import java.util.HashMap;
@@ -27,12 +28,14 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+*/
 /**
  *   @Description : MybatisPlus代码生成器
  *   ---------------------------------
  *   @Author : Liang.Guangqing
  *   @Date : Create in 2017/9/19 14:48　
- */
+ *//*
+
 public class MysqlGenerator {
 
 	private static String prefix="u_"; //table前缀
@@ -95,4 +98,4 @@ public class MysqlGenerator {
         // 打印注入设置
         System.err.println(mpg.getCfg().getMap().get("abc"));
     }
-}
+}*/

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.learn.housePrice.entity.Permission;
 
-@Service
 public interface PermissionService extends IBaseService<Permission, Long>{
 
 	/*

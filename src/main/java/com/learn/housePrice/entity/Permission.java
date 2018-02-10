@@ -2,33 +2,16 @@ package com.learn.housePrice.entity;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author lilin
- * @since 2017-11-13
- */
-@TableName("u_permission")
 public class Permission extends BaseEntity<Long>{
 
     private static final long serialVersionUID = 1L;
 
-	@TableField("permission_name")
 	private String permissionName;
-	@TableField("permission_url")
 	private String permissionUrl;
-	@TableField("permission_key")
 	private String permissionKey;
-	@TableField("parent_id")
 	private Long parentId;
-	@TableField("permission_type")
 	private String permissionType;
 	private Long sort;
 

@@ -18,10 +18,6 @@ import com.learn.housePrice.service.UserService;
 @Service 
 public class UserServiceImpl extends IBaseServiceImp<User, Long> implements UserService{
 
-	@Autowired
-	UserRoleDao userRoleMapper;
-	
-	
 	@Autowired  
     @Qualifier("userDao")  
     private UserDao userDao;  
@@ -34,7 +30,7 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 	
 	@Override
 	public void grantUserRoles(Long id, Long [] roleIds){
-		userRoleMapper.grantUserRoles(id, roleIds);
+		userDao.grantUserRoles(id, roleIds);
 	}
 
 	@Override
