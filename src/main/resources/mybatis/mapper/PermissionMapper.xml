@@ -144,4 +144,17 @@
 			u_role_permission
 		WHERE uid = #{permissionId}		
 	</delete>
+
+	<select id="findPermissionByRoleId" parameterType="Long" resultMap="BaseBaseResultMap" >
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			u_permission t1
+		LEFT JOIN
+			u_role_permission t2
+		ON
+			t1.id = t2.pid
+		WHERE
+			t2.uid = #{roleId}
+	</select>
 </mapper>

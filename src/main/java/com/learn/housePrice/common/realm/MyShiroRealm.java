@@ -1,21 +1,14 @@
 package com.learn.housePrice.common.realm;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.learn.housePrice.common.util.DESUtil;
+import com.learn.housePrice.entity.Permission;
+import com.learn.housePrice.entity.Role;
+import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.PermissionService;
+import com.learn.housePrice.service.RoleService;
+import com.learn.housePrice.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -25,13 +18,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
-import com.learn.housePrice.common.util.DESUtil;
-import com.learn.housePrice.entity.Permission;
-import com.learn.housePrice.entity.Role;
-import com.learn.housePrice.entity.User;
-import com.learn.housePrice.service.PermissionService;
-import com.learn.housePrice.service.RoleService;
-import com.learn.housePrice.service.UserService;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class MyShiroRealm extends AuthorizingRealm{
@@ -84,7 +72,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 		//密码进行加密处理  明文为  password+name
 		String paw = password+name;
 		String pawDES = DESUtil.encryptBasedDes(paw);
-		map.put("pswd", pawDES);
+		map.put("pswd", password);
 		User user = null;
 		// 从数据库获取对应用户名密码的用户
 		List<User> userList = userService.findByMapParams(map);
@@ -121,24 +109,22 @@ public class MyShiroRealm extends AuthorizingRealm{
 		Long userId = user.getId();
 		SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
 		//根据用户ID查询角色（role），放入到Authorization里。
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user_id", userId);
-		List<Role> roleList = roleService.findByMapParams(map);
+		List<Role> roleList = roleService.findRolesByUserId(userId);
 		Set<String> roleSet = new HashSet<String>();
 		for(Role role : roleList){
 			roleSet.add(role.getRoleKey());
 		}
-		roleSet.add("100002");//测试数据
+		//roleSet.add("100002");//测试数据
 		info.setRoles(roleSet);
 		//根据用户ID查询权限（permission），放入到Authorization里。
-		List<Permission> permissionList = permissionService.findByMapParams(map);
+		List<Permission> permissionList = permissionService.findPermissionByUserId(userId);
 		Set<String> permissionSet = new HashSet<String>();
 		for(Permission Permission : permissionList){
 			permissionSet.add(Permission.getPermissionName());
 		}
 		
-		permissionSet.add("权限添加");//测试数据
-		permissionSet.add("权限删除");//测试数据
+		//permissionSet.add("权限添加");//测试数据
+		//permissionSet.add("权限删除");//测试数据
 		info.setStringPermissions(permissionSet);
         return info;
 	}

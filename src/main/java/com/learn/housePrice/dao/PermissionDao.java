@@ -2,6 +2,8 @@ package com.learn.housePrice.dao;
 
 import com.learn.housePrice.entity.Permission;
 
+import java.util.List;
+
 public interface PermissionDao extends BaseDao<Permission, Long>{
 
 	/*
@@ -16,4 +18,11 @@ public interface PermissionDao extends BaseDao<Permission, Long>{
 	 * @return
 	 */
 	public void deleteRolePermissionByPermissionId(Long permissionId);
+
+	/*
+	 * 查找用户权限
+	 * @params userId
+	 * @return
+	 */
+	public List<Permission> findPermissionByRoleId(Long roleId);
 }
