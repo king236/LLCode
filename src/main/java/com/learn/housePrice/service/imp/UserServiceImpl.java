@@ -18,8 +18,7 @@ import com.learn.housePrice.service.UserService;
 @Service 
 public class UserServiceImpl extends IBaseServiceImp<User, Long> implements UserService{
 
-	@Autowired  
-    @Qualifier("userDao")  
+	@Autowired
     private UserDao userDao;  
 	
 	@Override
