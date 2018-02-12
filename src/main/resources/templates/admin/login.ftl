@@ -33,7 +33,7 @@
 	                    ${message!}
 	                </div>
                 </#if>
-                <form method="post" action="${ctx!}/admin/login" id="frm">
+                <form method="post" action="${ctx!}/admin/loginByShiro" id="frm">
                     <h4 class="no-margins">登录：</h4>
                     <p class="m-t-md">登录到H+后台主题UI框架</p>
                     <input type="text" class="form-control uname" name="nickname" id="username" placeholder="用户名" />
