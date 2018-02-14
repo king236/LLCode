@@ -1,11 +1,9 @@
 package com.learn.housePrice.service;
 
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.learn.housePrice.entity.User;
+
+import java.util.List;
 
 public interface UserService extends IBaseService<User, Long>{
 	/*
@@ -32,5 +30,11 @@ public interface UserService extends IBaseService<User, Long>{
 	 * @return List<Long>
 	 */
 	public List<Long> getRolesIdsByUserId(Long userId);
-	
+
+	/**
+	 * 通过用户名查找用户
+	 * @param userName
+	 * @return User
+	 */
+	public User findUserByName(String userName);
 }

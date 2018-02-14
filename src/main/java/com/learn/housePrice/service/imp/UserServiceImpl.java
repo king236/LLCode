@@ -1,19 +1,15 @@
 package com.learn.housePrice.service.imp;
 
-import java.util.Date;
+import com.learn.housePrice.dao.BaseDao;
+import com.learn.housePrice.dao.UserDao;
+import com.learn.housePrice.entity.User;
+import com.learn.housePrice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import com.learn.housePrice.dao.BaseDao;
-import com.learn.housePrice.dao.UserDao;
-import com.learn.housePrice.dao.UserRoleDao;
-import com.learn.housePrice.entity.User;
-import com.learn.housePrice.service.UserService;
 
 @Service 
 public class UserServiceImpl extends IBaseServiceImp<User, Long> implements UserService{
@@ -61,6 +57,11 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 	public List<Long> getRolesIdsByUserId(Long userId) {
 		// TODO Auto-generated method stub
 		return userDao.getRolesIdsByUserId(userId);
+	}
+
+	@Override
+	public User findUserByName(String userName) {
+		return userDao.findUserByName(userName);
 	}
 
 }

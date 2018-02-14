@@ -16,12 +16,10 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@Component
 public class MyShiroRealm extends AuthorizingRealm{
 	
 	@Autowired
@@ -53,7 +51,10 @@ public class MyShiroRealm extends AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
+		System.out.println("authentication token ");
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+		//获取用户的输入的账号.
+		String username = (String)authcToken.getPrincipal();
 		String name = token.getUsername();
 		String password = String.valueOf(token.getPassword());
 		//访问一次，计数一次
@@ -99,7 +100,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 	}
 	
 	 /*
-	  * 授权
+	  * 授权TfS?////                                 ，，密码密码木
 	  */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(

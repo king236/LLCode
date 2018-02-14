@@ -1,11 +1,10 @@
 package com.learn.housePrice.dao;
 
-import java.util.List;
-import java.util.Map;
-
+import com.learn.housePrice.entity.User;
 import org.apache.ibatis.annotations.Param;
 
-import com.learn.housePrice.entity.User;
+import java.util.List;
+import java.util.Map;
 
 
 public interface UserDao extends BaseDao<User, Long>{
@@ -35,4 +34,10 @@ public interface UserDao extends BaseDao<User, Long>{
 	 * @return List<Long>
 	 */
 	public List<Long> getRolesIdsByUserId(Long userId);
+	/**
+	 * 通过用户名查找用户
+	 * @param userName
+	 * @return User
+	 */
+    public User findUserByName(String userName);
 }

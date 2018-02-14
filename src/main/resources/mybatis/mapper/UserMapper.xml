@@ -128,4 +128,11 @@
     	WHERE
     		uid = #{userId}
     </select>
+
+	<select id="findUserByName" parameterType="String"  resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM u_user
+		WHERE nickname = #{username}
+	</select>
 </mapper>
