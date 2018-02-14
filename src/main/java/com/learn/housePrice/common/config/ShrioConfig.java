@@ -1,6 +1,6 @@
 package com.learn.housePrice.common.config;
 
-import com.learn.housePrice.common.realm.ShirioRealm;
+import com.learn.housePrice.common.realm.MyShiroRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -65,8 +65,8 @@ public class ShrioConfig {
 	 * @return
 	 */
 	@Bean
-	public ShirioRealm myShiroRealm() {
-		ShirioRealm myShiroRealm = new ShirioRealm();
+	public MyShiroRealm myShiroRealm() {
+		MyShiroRealm myShiroRealm = new MyShiroRealm();
 		return myShiroRealm;
 	}
 }
