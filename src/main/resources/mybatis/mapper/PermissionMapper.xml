@@ -145,7 +145,7 @@
 		WHERE uid = #{permissionId}		
 	</delete>
 
-	<select id="findPermissionByRoleId" parameterType="Long" resultMap="BaseBaseResultMap" >
+	<select id="findPermissionByRoleId" parameterType="Long" resultMap="BaseResultMap" >
 		SELECT
 			<include refid="Base_Column_List" />
 		FROM

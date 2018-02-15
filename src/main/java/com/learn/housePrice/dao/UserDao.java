@@ -37,7 +37,7 @@ public interface UserDao extends BaseDao<User, Long>{
 	/**
 	 * 通过用户名查找用户
 	 * @param userName
-	 * @return User
+	 * @return List<User>
 	 */
-    public User findUserByName(String userName);
+    public List<User> findUserByName(String userName);
 }

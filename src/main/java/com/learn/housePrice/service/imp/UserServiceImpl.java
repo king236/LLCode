@@ -61,7 +61,11 @@ public class UserServiceImpl extends IBaseServiceImp<User, Long> implements User
 
 	@Override
 	public User findUserByName(String userName) {
-		return userDao.findUserByName(userName);
+		List<User> userList = userDao.findUserByName(userName);
+		if (userList != null && userList.size() > 0){
+			return userList.get(0);
+		}
+		return null;
 	}
 
 }

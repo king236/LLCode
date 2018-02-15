@@ -1,3 +1,4 @@
+/*
 package com.learn.housePrice.common.realm;
 
 import com.learn.housePrice.common.util.DESUtil;
@@ -41,13 +42,15 @@ public class MyShiroRealm extends AuthorizingRealm{
 	private String SHIRO_IS_LOCK = "shiro_is_lock_";
 
 
-	/*
+	*/
+/*
 	 * 认证信息.(身份验证) : Authentication 是用来验证用户身份
 	 * 
 	 * @param token
 	 * @return
 	 * @throws AuthenticationException
-	 */
+	 *//*
+
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authcToken) throws AuthenticationException {
@@ -55,9 +58,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		//获取用户的输入的账号.
 		String username = (String)authcToken.getPrincipal();
-		String name = token.getUsername();
 		String password = String.valueOf(token.getPassword());
-		//访问一次，计数一次
+	*/
+/*	//访问一次，计数一次
 		ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();
 		opsForValue.increment(SHIRO_LOGIN_COUNT+name, 1);
 		//计数大于5时，设置用户被锁定一小时
@@ -74,18 +77,21 @@ public class MyShiroRealm extends AuthorizingRealm{
 		String paw = password+name;
 		String pawDES = DESUtil.encryptBasedDes(paw);
 		map.put("pswd", password);
-		User user = null;
+		User user = null;*//*
+
 		// 从数据库获取对应用户名密码的用户
-		List<User> userList = userService.findByMapParams(map);
+		//List<User> userList = userService.findUserByName(username);
 		if(userList.size()!=0){
 			user = userList.get(0);
 		} 
 		if (null == user) {
 			throw new AccountException("帐号或密码不正确！");
 		}else if("0".equals(user.getStatus())){
-			/**
+			*/
+/**
 			 * 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
-			 */
+			 *//*
+
 			throw new DisabledAccountException("此帐号已经设置为禁止登录！");
 		}else{
 			//登录成功
@@ -99,9 +105,11 @@ public class MyShiroRealm extends AuthorizingRealm{
 		return new SimpleAuthenticationInfo(user, password, getName());
 	}
 	
-	 /*
+	 */
+/*
 	  * 授权TfS?////                                 ，，密码密码木
-	  */
+	  *//*
+
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
@@ -131,3 +139,4 @@ public class MyShiroRealm extends AuthorizingRealm{
 	}
 	
 }
+*/
