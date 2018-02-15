@@ -1,12 +1,14 @@
 package com.learn.housePrice.common.config;
 
-import com.learn.housePrice.common.realm.ShiroRealm;
+import com.learn.housePrice.common.realm.ShiroCommonRealm;
+import com.learn.housePrice.web.fliter.CommonFormAuthenticationFilter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,7 +27,10 @@ public class ShrioConfig {
 	@Bean
 	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-
+		//获取filters
+		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+		//将自定义 的FormAuthenticationFilter注入shiroFilter中
+		filters.put("authc", new CommonFormAuthenticationFilter());
 		// 必须设置 SecurityManager
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
@@ -65,8 +70,8 @@ public class ShrioConfig {
 	 * @return
 	 */
 	@Bean
-	public ShiroRealm myShiroRealm() {
-		ShiroRealm myShiroRealm = new ShiroRealm();
+	public ShiroCommonRealm myShiroRealm() {
+		ShiroCommonRealm myShiroRealm = new ShiroCommonRealm();
 		return myShiroRealm;
 	}
 }

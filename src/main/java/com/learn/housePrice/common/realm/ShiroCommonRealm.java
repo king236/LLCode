@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-public class ShiroRealm extends AuthorizingRealm {
+public class ShiroCommonRealm extends AuthorizingRealm {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
