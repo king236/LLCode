@@ -3,8 +3,11 @@ package com.learn.housePrice.common.config;
 import com.learn.housePrice.common.realm.ShiroCommonRealm;
 import com.learn.housePrice.web.fliter.CommonFormAuthenticationFilter;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -74,4 +77,28 @@ public class ShrioConfig {
 		ShiroCommonRealm myShiroRealm = new ShiroCommonRealm();
 		return myShiroRealm;
 	}
+
+	/**
+	 *  开启shiro aop注解支持.
+	 *  使用代理方式;所以需要开启代码支持;
+	 * @param securityManager
+	 * @return
+	 */
+	@Bean
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+		return authorizationAttributeSourceAdvisor;
+	}
+	/**
+	 * 解决doGetAuthorizationInfo没有回调的问题
+	 * @return
+	 */
+	@Bean
+    @ConditionalOnMissingBean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+        defaultAAP.setProxyTargetClass(true);
+        return defaultAAP;
+    }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -74,6 +75,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequiresPermissions("userInfo:add")//权限管理;
 	public String add(ModelMap map) {
 		return "admin/user/form";
 	}
