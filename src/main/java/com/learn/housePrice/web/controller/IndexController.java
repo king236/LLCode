@@ -1,4 +1,4 @@
-package com.learn.housePrice.controller;
+package com.learn.housePrice.web.controller;
 
 import com.learn.housePrice.entity.User;
 import com.learn.housePrice.service.UserService;

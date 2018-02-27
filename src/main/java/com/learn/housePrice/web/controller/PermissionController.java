@@ -1,4 +1,4 @@
-package com.learn.housePrice.controller;
+package com.learn.housePrice.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
