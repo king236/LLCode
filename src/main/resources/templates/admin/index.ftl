@@ -60,19 +60,21 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                         
+                          	<@shiro.hasPermission name="admin:user:index">
                             <li>
                                <a class="J_menuItem" href="${ctx!}/admin/user/index">用户管理</a>
                             </li>
-                         
+                          	</@shiro.hasPermission>
+                          	<@shiro.hasPermission name="admin:role:index">
                             <li>
                                 <a class="J_menuItem" href="${ctx!}/admin/role/index">角色管理</a>
                             </li>
-                        
+                          	</@shiro.hasPermission>
+                         	<@shiro.hasPermission name="admin:permission:index">
                             <li>
                                 <a class="J_menuItem" href="${ctx!}/admin/permission/index">权限管理</a>
                             </li>
-                        
+                        	</@shiro.hasPermission>
                         </ul>
                     </li>
                     <li class="line dk"></li>

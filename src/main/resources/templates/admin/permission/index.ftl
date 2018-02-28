@@ -32,10 +32,11 @@
                     </div>
                     <div class="ibox-content">
                         <p>
-                        	
-                        		<button class="btn btn-success " type="button" onclick="add();"><i class="fa fa-plus"></i>&nbsp;添加</button>
-                        		<button class="btn btn-success " type="button" onclick="expandAllTree();"><i class="fa fa-plus"></i>&nbsp;展开全部</button>
-                        		<button class="btn btn-success " type="button" onclick="collapseAllTree();"><i class="fa fa-plus"></i>&nbsp;折叠所有</button>
+                        	<@shiro.hasPermission name="admin:permission:add">
+                        		<button class="btn btn-success " type="button" onclick="add();"><i class="fa fa-plus"></i>&nbsp;添加</button>               
+                        	</@shiro.hasPermission>
+                        	<button class="btn btn-success " type="button" onclick="expandAllTree();"><i class="fa fa-plus"></i>&nbsp;展开全部</button>
+                        	<button class="btn btn-success " type="button" onclick="collapseAllTree();"><i class="fa fa-plus"></i>&nbsp;折叠所有</button>
                         </p>
                         <hr>
                         <div class="row row-lg">
@@ -129,8 +130,8 @@
             		title:"快捷操作",
             		align: "center",
             		formatter: function (value, row, index) {
-            			var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
-                    	operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button>';
+            			var operateHtml = '<@shiro.hasPermission name="admin:permission:edit"><button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;</@shiro.hasPermission>';
+                    	operateHtml = operateHtml + '<@shiro.hasPermission name="admin:permission:delete"><button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button></@shiro.hasPermission>';
                         return operateHtml;
             		}
            		} ],

@@ -25,7 +25,7 @@
        FROM u_user
     </select>
 
-	<select id="checkUserLogin" parameterType="java.util.Map"  resultMap="BaseResultMap" >
+	<select id="checkUserLogin" parameterType="java.util.Map"  resultMap="ResultMapRoles" >
 		SELECT
 		<include refid="Base_Column_List" />
        	FROM u_user
@@ -33,13 +33,13 @@
        	AND pswd = #{pswd}
 	</select>
 
-	<select id="findByMapParams" parameterType="java.util.Map"  resultMap="BaseResultMap" >
+	<select id="findByMapParams" parameterType="java.util.Map"  resultMap="ResultMapRoles" >
 		SELECT
 		<include refid="Base_Column_List" />
        	FROM u_user
 	</select>
 
-    <select id="findById" parameterType="Long" resultMap="BaseResultMap" >
+    <select id="findById" parameterType="Long" resultMap="ResultMapRoles" >
         SELECT 
        <include refid="Base_Column_List" />
        FROM u_user
@@ -129,7 +129,7 @@
     		uid = #{userId}
     </select>
 
-	<select id="findUserByName" parameterType="String"  resultMap="BaseResultMap" >
+	<select id="findUserByName" parameterType="String"  resultMap="ResultMapRoles" >
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM u_user
