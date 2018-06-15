@@ -9,16 +9,15 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.learn.housePrice.entity.Role;
 import com.learn.housePrice.service.RoleService;
 import com.learn.housePrice.common.util.Result;
+
+import java.util.List;
 
 
 @Controller
@@ -111,7 +110,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Result grant(@PathVariable Long id, Long [] permissionIds){
+	public Result grant(@PathVariable Long id,@RequestBody List<Long> permissionIds){//
 		try {
 			roleService.grantRolePermissions(id, permissionIds);
 			return Result.success("关联角色成功");

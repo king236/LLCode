@@ -1,5 +1,6 @@
 package com.learn.housePrice.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +37,31 @@ public class RoleServiceImp extends IBaseServiceImp<Role, Long>implements RoleSe
 	}
 
 	@Override
-	public void grantRolePermissions(Long roleId, Long[] permissionIds) {
+	public void grantRolePermissions(Long roleId, List<Long> permissionIds) {
 		// TODO Auto-generated method stub
-		roleDao.grantRolePermissions(roleId, permissionIds);
+		//查找权限
+		List<Long> rolePermissionsOld = roleDao.findPermissionIdsByRoleId(roleId);
+		List<Long> rolePermissionsAdd = new ArrayList<>();
+		List<Long> rolePermissionsDelete = new ArrayList<>();
+
+		if (permissionIds == null || permissionIds.size() <= 0){
+			return;
+		}
+
+		if (rolePermissionsOld != null && rolePermissionsOld.size() > 0){
+			for (Long permissionId : rolePermissionsOld){
+				if (!permissionIds.contains(permissionId)){
+					rolePermissionsAdd.add(permissionId);
+				}
+			}
+			for (Long permissionId : permissionIds){
+				if (!rolePermissionsOld.contains(permissionId)){
+					rolePermissionsDelete.add(permissionId);
+				}
+			}
+		}
+		roleDao.grantRolePermissions(roleId, rolePermissionsAdd.toArray(new Long[rolePermissionsAdd.size()]));
+		roleDao.deleteRolePermission(roleId, rolePermissionsDelete);
 	}
 
 	@Override

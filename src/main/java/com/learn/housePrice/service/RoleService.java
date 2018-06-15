@@ -17,7 +17,7 @@ public interface RoleService extends IBaseService<Role, Long>{
 	 * @params roleId,permissionIds
 	 * @return
 	 */
-	public void grantRolePermissions( Long roleId, Long [] permissionIds);
+	public void grantRolePermissions( Long roleId, List<Long> permissionIds);
 	
 	/*
 	 * 通过roleId删除权限关联表相关信息

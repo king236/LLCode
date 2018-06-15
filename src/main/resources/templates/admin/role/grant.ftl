@@ -92,7 +92,8 @@
 				url : "${ctx!}/admin/role/grant/" + ${role.id},
 				type : "post",
 				dataType : "json",
-				data : {"permissionIds":selectIds},
+				data : {"permissionIds": JSON.stringify(selectIds)},
+                contentType:"application/json", // 指定这个协议很重要
 				success : function(msg) {
 					layer.msg(msg.message, {time: 2000},function(){
    						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

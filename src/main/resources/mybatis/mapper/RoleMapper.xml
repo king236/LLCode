@@ -120,7 +120,14 @@
     		(#{roleId}, #{item})
   		</foreach>
 	</insert>
-	
+
+	<delete id="deleteRolePermissions" >
+		DELETE FROM u_role_permission (rid, pid) values
+		<foreach item="item" collection="permissionIds" separator=",">
+			(#{roleId}, #{item})
+		</foreach>
+	</delete>
+
 	<select id="findPermissionIdsByRoleId" parameterType="Long" resultType="Long">	
     	SELECT 	
     		pid

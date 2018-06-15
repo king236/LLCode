@@ -21,7 +21,9 @@ public interface RoleDao extends BaseDao<Role, Long>{
 	 * @return
 	 */
 	public void grantRolePermissions(@Param("roleId") Long roleId, @Param("permissionIds") Long [] permissionIds);
-	
+
+	public void deleteRolePermission(@Param("roleId") Long roleId, @Param("permissionIds") List<Long> permissionIds);
+
 	/*
 	 * 通过roleId删除权限关联表相关信息
 	 * @params roleId
